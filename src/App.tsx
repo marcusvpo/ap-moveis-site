@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import SmoothScrollProvider from "./components/SmoothScrollProvider";
+import ScrollToTop from "./components/ScrollToTop";
 import Index from "./pages/Index";
 import Empresa from "./pages/Empresa";
 import Contato from "./pages/Contato";
@@ -21,6 +22,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <ScrollToTop />
           <AnimatePresence mode="wait">
             <Routes>
               <Route path="/" element={<Index />} />
