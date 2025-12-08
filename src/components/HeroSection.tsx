@@ -69,11 +69,10 @@ const HeroSection = () => {
             variants={itemVariants}
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-primary-foreground leading-tight mb-6"
           >
-            Seu Escritório Não é{" "}
+            Qualidade que dura,{" "}
             <br className="hidden sm:block" />
-            Trabalho.{" "}
             <span className="relative inline-block">
-              <span className="relative z-10">É Status.</span>
+              <span className="relative z-10">investimento que retorna.</span>
               <motion.span
                 className="absolute bottom-2 left-0 right-0 h-3 bg-accent/40 -z-0"
                 initial={{ scaleX: 0 }}
