@@ -2,9 +2,10 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import AnimatedBackground from "./effects/AnimatedBackground";
-import ScrollReveal, { StaggerContainer, StaggerItem } from "./effects/ScrollReveal";
+import ScrollReveal from "./effects/ScrollReveal";
 import GradientText from "./effects/GradientText";
 import MorphingBlob from "./effects/MorphingBlob";
+import ProgressiveImage from "./ProgressiveImage";
 
 // Product images
 import cadeiraPresidente from "@/assets/cadeira_presidente.jpeg";
@@ -103,24 +104,14 @@ const ProductsSection = () => {
     <section id="produtos" className="py-24 relative overflow-hidden">
       {/* Animated Background */}
       <AnimatedBackground type="waves" intensity="low" className="absolute inset-0" />
-      
+
       {/* Decorative blobs */}
-      <MorphingBlob 
-        className="top-1/4 -right-32" 
-        color="accent" 
-        size="lg" 
-        opacity={0.08}
-      />
-      <MorphingBlob 
-        className="bottom-1/4 -left-32" 
-        color="primary" 
-        size="xl" 
-        opacity={0.06}
-      />
+      <MorphingBlob className="top-1/4 -right-32" color="accent" size="lg" opacity={0.08} />
+      <MorphingBlob className="bottom-1/4 -left-32" color="primary" size="xl" opacity={0.06} />
 
       <div className="container mx-auto px-4 relative z-10">
         <ScrollReveal preset="fade-up" className="text-center mb-12">
-          <motion.span 
+          <motion.span
             className="inline-block px-4 py-1.5 rounded-full bg-accent/10 text-accent font-semibold text-sm uppercase tracking-wider mb-4"
             whileHover={{ scale: 1.05 }}
           >
@@ -161,10 +152,7 @@ const ProductsSection = () => {
         </ScrollReveal>
 
         {/* Products Grid */}
-        <motion.div
-          layout
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto"
-        >
+        <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
           <AnimatePresence mode="popLayout">
             {filteredProducts.map((product, index) => (
               <motion.div
@@ -173,24 +161,23 @@ const ProductsSection = () => {
                 initial={{ opacity: 0, y: 30, scale: 0.95 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ 
-                  duration: 0.4, 
+                transition={{
+                  duration: 0.4,
                   delay: index * 0.1,
-                  layout: { duration: 0.3 }
+                  layout: { duration: 0.3 },
                 }}
                 className="group relative glow-card bg-card rounded-3xl overflow-hidden border border-border/50"
                 whileHover={{ y: -8 }}
               >
                 {/* Image Container */}
                 <div className="relative h-64 bg-gradient-to-br from-muted/50 to-muted overflow-hidden">
-                  <motion.img
+                  <ProgressiveImage
                     src={product.image}
                     alt={product.name}
-                    className="w-full h-full object-contain p-4"
-                    whileHover={{ scale: 1.1 }}
-                    transition={{ duration: 0.5 }}
+                    className="w-full h-full"
+                    imgClassName="object-contain p-4 group-hover:scale-110 transition-transform duration-500"
                   />
-                  
+
                   {/* Shimmer effect */}
                   <motion.div
                     className="absolute inset-0 pointer-events-none"
@@ -201,19 +188,15 @@ const ProductsSection = () => {
                       background: 'linear-gradient(90deg, transparent, hsl(0 0% 100% / 0.2), transparent)',
                     }}
                   />
-                  
+
                   {/* Hover Overlay with Features */}
-                  <motion.div 
+                  <motion.div
                     className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/60 to-transparent flex items-end p-6"
                     initial={{ opacity: 0 }}
                     whileHover={{ opacity: 1 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <motion.div 
-                      className="space-y-2"
-                      initial={{ y: 20 }}
-                      whileHover={{ y: 0 }}
-                    >
+                    <motion.div className="space-y-2" initial={{ y: 20 }} whileHover={{ y: 0 }}>
                       {product.features.map((feature, idx) => (
                         <motion.span
                           key={idx}
@@ -231,15 +214,13 @@ const ProductsSection = () => {
 
                 {/* Content */}
                 <div className="p-6">
-                  <motion.h3 
+                  <motion.h3
                     className="text-xl font-bold text-foreground group-hover:text-primary transition-colors"
                     layoutId={`title-${product.id}`}
                   >
                     {product.name}
                   </motion.h3>
-                  <p className="text-muted-foreground text-sm mt-2">
-                    {product.description}
-                  </p>
+                  <p className="text-muted-foreground text-sm mt-2">{product.description}</p>
 
                   <motion.button
                     onClick={() => openWhatsApp(product.name)}
@@ -248,17 +229,14 @@ const ProductsSection = () => {
                   >
                     <span className="relative">
                       Solicitar Orçamento
-                      <motion.span 
+                      <motion.span
                         className="absolute left-0 bottom-0 h-0.5 bg-primary"
                         initial={{ width: 0 }}
                         whileHover={{ width: '100%' }}
                         transition={{ duration: 0.3 }}
                       />
                     </span>
-                    <motion.span
-                      animate={{ x: [0, 5, 0] }}
-                      transition={{ duration: 1.5, repeat: Infinity }}
-                    >
+                    <motion.span animate={{ x: [0, 5, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>
                       <ArrowRight className="w-4 h-4" />
                     </motion.span>
                   </motion.button>

@@ -429,6 +429,26 @@
   }
 }
 
+/* Shimmer Text Animation */
+@keyframes shimmer-text {
+  0% {
+    background-position: 200% center;
+  }
+  100% {
+    background-position: -200% center;
+  }
+}
+
+/* Scrollbar hide utility */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 @layer utilities {
   /* Animation Delays */
   .animation-delay-100 { animation-delay: 100ms; }
