@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useNavigation } from './NavigationContext';
 import { X, Phone, Instagram, Facebook, Linkedin, ArrowUpRight } from 'lucide-react';
-import apLogo from '@/assets/ap-logo.png';
+import logoAp from '@/assets/logo-ap.png';
 
 // Preview images
 import estacao1 from '@/assets/estacao_trabalho_1.jpeg';
@@ -120,37 +120,38 @@ const FullscreenMenu = () => {
           {/* Close Button */}
           <motion.button
             onClick={closeMenu}
-            className="absolute top-8 right-8 w-14 h-14 rounded-full bg-background/10 backdrop-blur-sm flex items-center justify-center text-background hover:bg-background/20 transition-colors z-10"
+            className="absolute top-4 right-4 md:top-8 md:right-8 w-12 h-12 md:w-14 md:h-14 rounded-full bg-background/10 backdrop-blur-sm flex items-center justify-center text-background hover:bg-background/20 transition-colors z-10"
             initial={{ opacity: 0, rotate: -90 }}
             animate={{ opacity: 1, rotate: 0 }}
             exit={{ opacity: 0, rotate: 90 }}
             transition={{ delay: 0.5 }}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
+            aria-label="Fechar menu"
           >
-            <X className="w-6 h-6" />
+            <X className="w-5 h-5 md:w-6 md:h-6" />
           </motion.button>
 
           {/* Logo */}
           <motion.div
-            className="absolute top-8 left-8 md:left-12"
+            className="absolute top-4 left-4 md:top-8 md:left-8 lg:left-12"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
           >
-            <img src={apLogo} alt="AP Móveis" className="h-12 md:h-16" />
+            <img src={logoAp} alt="AP Móveis" className="h-10 md:h-12 lg:h-16" />
           </motion.div>
 
           {/* Main Content */}
-          <div className="h-full flex flex-col md:flex-row items-center justify-center px-8 md:px-16 lg:px-24 pt-24 md:pt-0">
+          <div className="h-full flex flex-col md:flex-row items-center justify-center px-4 md:px-8 lg:px-16 xl:px-24 pt-20 md:pt-0">
             {/* Menu Items */}
-            <div className="flex-1 flex flex-col justify-center space-y-2 md:space-y-4 w-full max-w-2xl">
+            <div className="flex-1 flex flex-col justify-center space-y-1 md:space-y-2 lg:space-y-4 w-full max-w-2xl">
               {menuItems.map((item) => (
                 <motion.button
                   key={item.path}
                   variants={itemVariants}
                   onClick={() => handleNavigate(item.path)}
-                  className={`group flex items-center gap-4 md:gap-8 text-left py-3 md:py-4 transition-all ${
+                  className={`group flex items-center gap-3 md:gap-4 lg:gap-8 text-left py-2 md:py-3 lg:py-4 transition-all ${
                     location.pathname === item.path 
                       ? 'text-accent' 
                       : 'text-background/70 hover:text-background'
@@ -158,12 +159,12 @@ const FullscreenMenu = () => {
                   whileHover={{ x: 20 }}
                 >
                   {/* Number */}
-                  <span className="text-sm md:text-base font-light text-primary opacity-60 group-hover:opacity-100 transition-opacity">
+                  <span className="text-xs md:text-sm lg:text-base font-light text-primary opacity-60 group-hover:opacity-100 transition-opacity">
                     {item.number}
                   </span>
                   
                   {/* Label */}
-                  <span className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">
+                  <span className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight">
                     {item.label}
                   </span>
                   
@@ -173,7 +174,7 @@ const FullscreenMenu = () => {
                     initial={{ x: -10 }}
                     whileHover={{ x: 0 }}
                   >
-                    <ArrowUpRight className="w-8 h-8 md:w-10 md:h-10" />
+                    <ArrowUpRight className="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10" />
                   </motion.span>
 
                   {/* Underline */}
@@ -194,7 +195,7 @@ const FullscreenMenu = () => {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.6 }}
             >
-              <div className="relative w-80 h-80 xl:w-96 xl:h-96">
+              <div className="relative w-64 h-64 xl:w-80 xl:h-80 2xl:w-96 2xl:h-96">
                 <motion.div
                   className="absolute inset-0 rounded-3xl overflow-hidden"
                   animate={{
@@ -210,18 +211,19 @@ const FullscreenMenu = () => {
                     src={estacao1}
                     alt="Preview"
                     className="w-full h-full object-cover"
+                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-foreground/50 to-transparent" />
                 </motion.div>
                 
                 {/* Decorative elements */}
                 <motion.div
-                  className="absolute -top-4 -right-4 w-24 h-24 border-2 border-primary/30 rounded-2xl"
+                  className="absolute -top-4 -right-4 w-20 h-20 xl:w-24 xl:h-24 border-2 border-primary/30 rounded-2xl"
                   animate={{ rotate: 360 }}
                   transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
                 />
                 <motion.div
-                  className="absolute -bottom-4 -left-4 w-16 h-16 bg-accent/20 rounded-xl"
+                  className="absolute -bottom-4 -left-4 w-12 h-12 xl:w-16 xl:h-16 bg-accent/20 rounded-xl"
                   animate={{ scale: [1, 1.1, 1] }}
                   transition={{ duration: 3, repeat: Infinity }}
                 />
@@ -231,7 +233,7 @@ const FullscreenMenu = () => {
 
           {/* Bottom Bar */}
           <motion.div
-            className="absolute bottom-8 left-8 right-8 flex flex-col md:flex-row items-center justify-between gap-4 text-background/60"
+            className="absolute bottom-4 md:bottom-8 left-4 right-4 md:left-8 md:right-8 flex flex-col md:flex-row items-center justify-between gap-3 md:gap-4 text-background/60"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7 }}
@@ -246,22 +248,25 @@ const FullscreenMenu = () => {
             <div className="flex items-center gap-4">
               <motion.a
                 href="#"
-                className="hover:text-background transition-colors"
+                className="hover:text-background transition-colors p-2"
                 whileHover={{ scale: 1.2, y: -2 }}
+                aria-label="Instagram"
               >
                 <Instagram className="w-5 h-5" />
               </motion.a>
               <motion.a
                 href="#"
-                className="hover:text-background transition-colors"
+                className="hover:text-background transition-colors p-2"
                 whileHover={{ scale: 1.2, y: -2 }}
+                aria-label="Facebook"
               >
                 <Facebook className="w-5 h-5" />
               </motion.a>
               <motion.a
                 href="#"
-                className="hover:text-background transition-colors"
+                className="hover:text-background transition-colors p-2"
                 whileHover={{ scale: 1.2, y: -2 }}
+                aria-label="LinkedIn"
               >
                 <Linkedin className="w-5 h-5" />
               </motion.a>
@@ -272,7 +277,7 @@ const FullscreenMenu = () => {
               href="https://wa.me/5516320270220"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 bg-accent text-accent-foreground px-4 py-2 rounded-full text-sm font-medium"
+              className="flex items-center gap-2 bg-accent text-accent-foreground px-4 py-2 rounded-full text-sm font-medium min-h-[40px]"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >

@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
 import { Phone } from 'lucide-react';
-import apLogo from '@/assets/ap-logo.png';
+import logoAp from '@/assets/logo-ap.png';
 import { useNavigation } from './NavigationContext';
 
 const TopBar = () => {
@@ -11,7 +11,7 @@ const TopBar = () => {
 
   return (
     <motion.header
-      className={`fixed top-0 left-0 right-0 z-50 px-6 md:px-12 py-4 flex items-center justify-between ${
+      className={`fixed top-0 left-0 right-0 z-50 px-4 md:px-6 lg:px-12 py-3 md:py-4 flex items-center justify-between ${
         isHome ? '' : 'glass-scrolled'
       }`}
       initial={{ y: -100, opacity: 0 }}
@@ -21,9 +21,9 @@ const TopBar = () => {
       {/* Logo */}
       <Link to="/" className="relative z-10">
         <motion.img
-          src={apLogo}
+          src={logoAp}
           alt="AP Móveis"
-          className="h-10 md:h-12"
+          className="h-8 sm:h-10 md:h-12"
           whileHover={{ scale: 1.05 }}
         />
       </Link>
@@ -41,9 +41,10 @@ const TopBar = () => {
       {/* Menu Button */}
       <motion.button
         onClick={toggleMenu}
-        className="relative flex items-center gap-3 bg-foreground text-background px-4 py-2 rounded-full font-medium text-sm group overflow-hidden"
+        className="relative flex items-center gap-2 md:gap-3 bg-foreground text-background px-3 md:px-4 py-2 rounded-full font-medium text-sm group overflow-hidden min-h-[40px] min-w-[80px] justify-center"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
+        aria-label="Abrir menu de navegação"
       >
         <span className="relative z-10">Menu</span>
         <div className="relative z-10 flex flex-col gap-1">
