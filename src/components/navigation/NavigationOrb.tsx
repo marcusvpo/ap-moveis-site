@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useNavigation } from './NavigationContext';
-import apLogo from '@/assets/ap-logo.png';
+import logoAp from '@/assets/logo-ap.png';
 
 const NavigationOrb = () => {
   const { isMenuOpen, toggleMenu } = useNavigation();
@@ -56,7 +56,7 @@ const NavigationOrb = () => {
       
       {/* Logo */}
       <motion.img
-        src={apLogo}
+        src={logoAp}
         alt="Menu"
         className="w-10 h-10 object-contain relative z-10"
         animate={{
