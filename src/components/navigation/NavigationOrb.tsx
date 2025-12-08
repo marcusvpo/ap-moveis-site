@@ -8,22 +8,22 @@ const NavigationOrb = () => {
   return (
     <motion.button
       onClick={toggleMenu}
-      className="fixed bottom-8 right-8 z-[100] w-16 h-16 rounded-full bg-primary flex items-center justify-center shadow-glow cursor-pointer overflow-hidden group"
-      initial={{ scale: 0, opacity: 0 }}
+      className="fixed top-6 right-6 z-[100] w-14 h-14 rounded-2xl bg-primary/90 backdrop-blur-md flex items-center justify-center shadow-glow cursor-pointer overflow-hidden group border border-primary-light/30"
+      initial={{ scale: 0, opacity: 0, y: -20 }}
       animate={{ 
         scale: isMenuOpen ? 0 : 1, 
         opacity: isMenuOpen ? 0 : 1,
-        rotate: isMenuOpen ? 180 : 0
+        y: isMenuOpen ? -20 : 0
       }}
       transition={{ 
         type: "spring", 
-        stiffness: 260, 
-        damping: 20,
+        stiffness: 300, 
+        damping: 25,
         delay: isMenuOpen ? 0 : 0.3
       }}
       whileHover={{ 
-        scale: 1.1,
-        boxShadow: "0 0 60px hsl(202 61% 44% / 0.6)"
+        scale: 1.08,
+        boxShadow: "0 0 40px hsl(202 61% 44% / 0.7), 0 0 80px hsl(202 61% 44% / 0.3)"
       }}
       whileTap={{ scale: 0.95 }}
     >
