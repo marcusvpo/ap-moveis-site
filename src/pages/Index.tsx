@@ -26,9 +26,9 @@ const SectionSkeleton = () => (
 );
 
 const BannerSkeleton = () => (
-  <div className="px-4 md:px-8 lg:px-12 py-8 md:py-12">
+  <div className="px-3 sm:px-4 md:px-8 lg:px-12 py-6 sm:py-8 md:py-12">
     <div className="max-w-7xl mx-auto">
-      <div className="aspect-[4/3] sm:aspect-[16/9] md:aspect-[21/9] lg:aspect-[21/7] bg-muted animate-pulse rounded-2xl md:rounded-3xl" />
+      <div className="aspect-[16/10] sm:aspect-[16/9] md:aspect-[21/9] lg:aspect-[21/8] bg-muted animate-pulse rounded-xl sm:rounded-2xl md:rounded-3xl" />
     </div>
   </div>
 );

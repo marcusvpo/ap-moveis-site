@@ -439,6 +439,67 @@
   }
 }
 
+/* Optimized CSS animations for backgrounds */
+@keyframes aurora {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes blob-slow {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+  33% {
+    transform: translate(10px, -10px) scale(1.02);
+    border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+  }
+  66% {
+    transform: translate(-5px, 5px) scale(0.98);
+    border-radius: 50% 50% 40% 60% / 50% 40% 60% 50%;
+  }
+}
+
+@keyframes gradient-slow {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-aurora {
+  animation: aurora 8s ease-in-out infinite;
+}
+
+.animate-blob-slow {
+  animation: blob-slow 20s ease-in-out infinite;
+  will-change: transform, border-radius;
+}
+
+.animate-gradient-slow {
+  animation: gradient-slow 15s ease-in-out infinite;
+  will-change: background-position;
+}
+
+@keyframes gradient-text {
+  0%, 100% {
+    background-position: 0% center;
+  }
+  50% {
+    background-position: 100% center;
+  }
+}
+
+.animate-gradient-text {
+  animation: gradient-text 4s ease-in-out infinite;
+}
+
 /* Scrollbar hide utility */
 .scrollbar-hide {
   -ms-overflow-style: none;
