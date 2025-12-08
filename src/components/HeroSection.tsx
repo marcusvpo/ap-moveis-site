@@ -30,62 +30,23 @@ const HeroSection = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Video Background */}
+      {/* Background with optimized image */}
       <div className="absolute inset-0">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
+        <img
+          src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1920&auto=format&fit=crop"
+          alt=""
           className="w-full h-full object-cover"
-          poster="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop"
-        >
-          <source
-            src="https://cdn.coverr.co/videos/coverr-business-office-environment-6082/1080p.mp4"
-            type="video/mp4"
-          />
-        </video>
+          loading="eager"
+        />
 
         {/* Overlay Gradient */}
-        <div className="absolute inset-0 hero-overlay" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
 
-        {/* Noise texture overlay */}
-        <div
-          className="absolute inset-0 opacity-[0.03] pointer-events-none"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-          }}
-        />
-
-        {/* Animated floating gradients */}
-        <motion.div
-          className="absolute inset-0 pointer-events-none"
-          animate={{
-            background: [
-              "radial-gradient(circle at 20% 50%, hsl(var(--primary) / 0.15) 0%, transparent 50%)",
-              "radial-gradient(circle at 80% 50%, hsl(var(--accent) / 0.15) 0%, transparent 50%)",
-              "radial-gradient(circle at 50% 80%, hsl(var(--primary) / 0.15) 0%, transparent 50%)",
-              "radial-gradient(circle at 20% 50%, hsl(var(--primary) / 0.15) 0%, transparent 50%)",
-            ],
-          }}
-          transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-        />
-
-        {/* Decorative Elements */}
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute top-1/4 right-1/4 w-64 md:w-96 h-64 md:h-96 bg-accent/20 rounded-full blur-3xl" />
-          <div className="absolute bottom-1/4 left-1/4 w-48 md:w-80 h-48 md:h-80 bg-primary/30 rounded-full blur-3xl" />
+        {/* Decorative Elements - simplified */}
+        <div className="absolute inset-0 opacity-40 hidden md:block">
+          <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-accent/15 rounded-full blur-3xl" />
+          <div className="absolute bottom-1/4 left-1/4 w-48 h-48 bg-primary/20 rounded-full blur-3xl" />
         </div>
-
-        {/* Grid Breaking - Element that "leaks" outside */}
-        <motion.div
-          className="absolute -right-20 top-1/3 w-64 h-96 bg-accent/10 rounded-full blur-3xl"
-          animate={{
-            x: [0, 30, 0],
-            scale: [1, 1.1, 1],
-          }}
-          transition={{ duration: 8, repeat: Infinity }}
-        />
       </div>
 
       {/* Content */}

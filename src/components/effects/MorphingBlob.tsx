@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface MorphingBlobProps {
   className?: string;
@@ -9,10 +9,10 @@ interface MorphingBlobProps {
 }
 
 const sizeMap = {
-  sm: 'w-32 h-32',
-  md: 'w-48 h-48',
-  lg: 'w-64 h-64',
-  xl: 'w-96 h-96',
+  sm: 'w-24 h-24 md:w-32 md:h-32',
+  md: 'w-36 h-36 md:w-48 md:h-48',
+  lg: 'w-48 h-48 md:w-64 md:h-64',
+  xl: 'w-64 h-64 md:w-96 md:h-96',
 };
 
 const MorphingBlob = ({
@@ -22,40 +22,35 @@ const MorphingBlob = ({
   blur = true,
   opacity = 0.3,
 }: MorphingBlobProps) => {
+  const isMobile = useIsMobile();
+  
   const getGradient = () => {
     switch (color) {
       case 'primary':
-        return 'from-primary/40 via-primary-light/30 to-primary/40';
+        return 'from-primary/30 to-primary/20';
       case 'accent':
-        return 'from-accent/40 via-accent/30 to-accent/40';
+        return 'from-accent/30 to-accent/20';
       case 'mixed':
-        return 'from-primary/40 via-accent/30 to-primary-light/40';
+        return 'from-primary/30 to-accent/20';
       default:
-        return 'from-primary/40 via-primary-light/30 to-primary/40';
+        return 'from-primary/30 to-primary/20';
     }
   };
 
+  // On mobile, render a simpler static blob
+  if (isMobile) {
+    return (
+      <div
+        className={`absolute bg-gradient-to-br ${getGradient()} ${sizeMap[size]} ${blur ? 'blur-2xl' : ''} rounded-full ${className}`}
+        style={{ opacity: opacity * 0.6 }}
+      />
+    );
+  }
+
   return (
-    <motion.div
-      className={`absolute bg-gradient-to-br ${getGradient()} ${sizeMap[size]} ${blur ? 'blur-3xl' : ''} ${className}`}
+    <div
+      className={`absolute bg-gradient-to-br ${getGradient()} ${sizeMap[size]} ${blur ? 'blur-3xl' : ''} rounded-full animate-blob-slow ${className}`}
       style={{ opacity }}
-      animate={{
-        borderRadius: [
-          '60% 40% 30% 70% / 60% 30% 70% 40%',
-          '30% 60% 70% 40% / 50% 60% 30% 60%',
-          '50% 60% 30% 60% / 30% 40% 70% 50%',
-          '60% 40% 50% 40% / 60% 50% 40% 60%',
-          '60% 40% 30% 70% / 60% 30% 70% 40%',
-        ],
-        scale: [1, 1.1, 0.95, 1.05, 1],
-        x: [0, 20, -10, 15, 0],
-        y: [0, -15, 10, -5, 0],
-      }}
-      transition={{
-        duration: 15,
-        repeat: Infinity,
-        ease: 'easeInOut',
-      }}
     />
   );
 };
