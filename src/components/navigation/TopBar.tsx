@@ -38,32 +38,53 @@ const TopBar = () => {
         <span>(16) 3202-7022</span>
       </motion.a>
 
-      {/* Menu Button */}
+      {/* Menu Button - Destacado */}
       <motion.button
         onClick={toggleMenu}
-        className="relative flex items-center gap-2 md:gap-3 bg-foreground text-background px-3 md:px-4 py-2 rounded-full font-medium text-sm group overflow-hidden min-h-[40px] min-w-[80px] justify-center"
-        whileHover={{ scale: 1.05 }}
+        className="relative flex items-center gap-3 bg-primary text-primary-foreground px-5 md:px-6 py-3 rounded-xl font-semibold text-base group overflow-hidden shadow-glow border border-primary-light/30"
+        whileHover={{ 
+          scale: 1.08,
+          boxShadow: "0 0 40px hsl(var(--primary) / 0.6), 0 0 80px hsl(var(--primary) / 0.3)"
+        }}
         whileTap={{ scale: 0.95 }}
         aria-label="Abrir menu de navegação"
       >
-        <span className="relative z-10">Menu</span>
-        <div className="relative z-10 flex flex-col gap-1">
+        {/* Glow pulse animation */}
+        <motion.div
+          className="absolute inset-0 rounded-xl bg-primary-light/20"
+          animate={{
+            opacity: [0.3, 0.6, 0.3],
+            scale: [1, 1.02, 1]
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        
+        <span className="relative z-10 font-bold tracking-wide">MENU</span>
+        <div className="relative z-10 flex flex-col gap-1.5">
           <motion.span 
-            className="block w-4 h-0.5 bg-background rounded-full"
-            whileHover={{ width: 16 }}
+            className="block w-5 h-0.5 bg-primary-foreground rounded-full origin-right"
+            animate={{ scaleX: [1, 0.7, 1] }}
+            transition={{ duration: 1.5, repeat: Infinity, delay: 0 }}
           />
           <motion.span 
-            className="block w-3 h-0.5 bg-background rounded-full"
-            whileHover={{ width: 16 }}
+            className="block w-5 h-0.5 bg-primary-foreground rounded-full"
+          />
+          <motion.span 
+            className="block w-5 h-0.5 bg-primary-foreground rounded-full origin-left"
+            animate={{ scaleX: [1, 0.7, 1] }}
+            transition={{ duration: 1.5, repeat: Infinity, delay: 0.3 }}
           />
         </div>
         
-        {/* Hover effect */}
+        {/* Shimmer effect */}
         <motion.div
-          className="absolute inset-0 bg-primary"
-          initial={{ x: '-100%' }}
-          whileHover={{ x: 0 }}
-          transition={{ duration: 0.3 }}
+          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full"
+          animate={{ translateX: ['-100%', '200%'] }}
+          transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
         />
       </motion.button>
     </motion.header>
