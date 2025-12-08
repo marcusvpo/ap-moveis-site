@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import AnimatedBackground from "./effects/AnimatedBackground";
+import ScrollReveal, { StaggerContainer, StaggerItem } from "./effects/ScrollReveal";
+import GradientText from "./effects/GradientText";
+import MorphingBlob from "./effects/MorphingBlob";
 
 // Product images
 import cadeiraPresidente from "@/assets/cadeira_presidente.jpeg";
@@ -80,28 +84,6 @@ const categories = [
   { id: "gamer" as Category, label: "Gamer" },
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1 },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: "easeOut" as const },
-  },
-  exit: {
-    opacity: 0,
-    scale: 0.9,
-    transition: { duration: 0.3 },
-  },
-};
-
 const ProductsSection = () => {
   const [activeCategory, setActiveCategory] = useState<Category>("todos");
 
@@ -118,114 +100,177 @@ const ProductsSection = () => {
   };
 
   return (
-    <section id="produtos" className="py-24 bg-background relative overflow-hidden">
-      {/* Background elements */}
-      <div className="absolute inset-0 bg-gradient-to-b from-muted/20 to-transparent pointer-events-none" />
+    <section id="produtos" className="py-24 relative overflow-hidden">
+      {/* Animated Background */}
+      <AnimatedBackground type="waves" intensity="low" className="absolute inset-0" />
+      
+      {/* Decorative blobs */}
+      <MorphingBlob 
+        className="top-1/4 -right-32" 
+        color="accent" 
+        size="lg" 
+        opacity={0.08}
+      />
+      <MorphingBlob 
+        className="bottom-1/4 -left-32" 
+        color="primary" 
+        size="xl" 
+        opacity={0.06}
+      />
 
       <div className="container mx-auto px-4 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
-        >
-          <span className="text-accent font-semibold text-sm uppercase tracking-wider">
+        <ScrollReveal preset="fade-up" className="text-center mb-12">
+          <motion.span 
+            className="inline-block px-4 py-1.5 rounded-full bg-accent/10 text-accent font-semibold text-sm uppercase tracking-wider mb-4"
+            whileHover={{ scale: 1.05 }}
+          >
             Catálogo
-          </span>
+          </motion.span>
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mt-2">
-            O Design que Você Merece
+            O Design que Você <GradientText>Merece</GradientText>
           </h2>
           <p className="text-muted-foreground mt-4 max-w-2xl mx-auto text-lg">
             Cadeiras e mobiliário premium para transformar seu ambiente de trabalho
           </p>
-        </motion.div>
+        </ScrollReveal>
 
         {/* Filter Pills */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-3 mb-12"
-        >
+        <ScrollReveal preset="fade-up" delay={0.2} className="flex flex-wrap justify-center gap-3 mb-12">
           {categories.map((cat) => (
-            <button
+            <motion.button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
-              className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
+              className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 relative overflow-hidden ${
                 activeCategory === cat.id
                   ? "bg-primary text-primary-foreground shadow-lg shadow-primary/25"
                   : "bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground"
               }`}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              {cat.label}
-            </button>
+              {activeCategory === cat.id && (
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-primary via-primary-light to-primary"
+                  layoutId="activeCategory"
+                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                />
+              )}
+              <span className="relative z-10">{cat.label}</span>
+            </motion.button>
           ))}
-        </motion.div>
+        </ScrollReveal>
 
         {/* Products Grid */}
         <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
+          layout
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto"
         >
           <AnimatePresence mode="popLayout">
-            {filteredProducts.map((product) => (
+            {filteredProducts.map((product, index) => (
               <motion.div
                 key={product.id}
-                variants={itemVariants}
                 layout
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                className="group relative bg-card rounded-3xl overflow-hidden border border-border/50 hover:border-primary/30 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10"
+                initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ 
+                  duration: 0.4, 
+                  delay: index * 0.1,
+                  layout: { duration: 0.3 }
+                }}
+                className="group relative glow-card bg-card rounded-3xl overflow-hidden border border-border/50"
+                whileHover={{ y: -8 }}
               >
                 {/* Image Container */}
                 <div className="relative h-64 bg-gradient-to-br from-muted/50 to-muted overflow-hidden">
-                  <img
+                  <motion.img
                     src={product.image}
                     alt={product.name}
-                    className="w-full h-full object-contain p-4 transition-transform duration-500 group-hover:scale-110"
+                    className="w-full h-full object-contain p-4"
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ duration: 0.5 }}
                   />
                   
-                  {/* Hover Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                    <div className="space-y-2">
+                  {/* Shimmer effect */}
+                  <motion.div
+                    className="absolute inset-0 pointer-events-none"
+                    initial={{ x: '-100%' }}
+                    whileHover={{ x: '100%' }}
+                    transition={{ duration: 0.6 }}
+                    style={{
+                      background: 'linear-gradient(90deg, transparent, hsl(0 0% 100% / 0.2), transparent)',
+                    }}
+                  />
+                  
+                  {/* Hover Overlay with Features */}
+                  <motion.div 
+                    className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/60 to-transparent flex items-end p-6"
+                    initial={{ opacity: 0 }}
+                    whileHover={{ opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <motion.div 
+                      className="space-y-2"
+                      initial={{ y: 20 }}
+                      whileHover={{ y: 0 }}
+                    >
                       {product.features.map((feature, idx) => (
-                        <span
+                        <motion.span
                           key={idx}
-                          className="inline-block text-xs bg-primary/20 text-primary px-2 py-1 rounded-full mr-2"
+                          className="inline-block text-xs bg-primary/20 text-primary px-3 py-1.5 rounded-full mr-2 backdrop-blur-sm"
+                          initial={{ opacity: 0, y: 10 }}
+                          whileHover={{ opacity: 1, y: 0 }}
+                          transition={{ delay: idx * 0.1 }}
                         >
                           {feature}
-                        </span>
+                        </motion.span>
                       ))}
-                    </div>
-                  </div>
+                    </motion.div>
+                  </motion.div>
                 </div>
 
                 {/* Content */}
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
+                  <motion.h3 
+                    className="text-xl font-bold text-foreground group-hover:text-primary transition-colors"
+                    layoutId={`title-${product.id}`}
+                  >
                     {product.name}
-                  </h3>
+                  </motion.h3>
                   <p className="text-muted-foreground text-sm mt-2">
                     {product.description}
                   </p>
 
-                  <button
+                  <motion.button
                     onClick={() => openWhatsApp(product.name)}
                     className="mt-4 flex items-center gap-2 text-primary font-medium group/btn"
+                    whileHover={{ x: 5 }}
                   >
                     <span className="relative">
                       Solicitar Orçamento
-                      <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover/btn:w-full" />
+                      <motion.span 
+                        className="absolute left-0 bottom-0 h-0.5 bg-primary"
+                        initial={{ width: 0 }}
+                        whileHover={{ width: '100%' }}
+                        transition={{ duration: 0.3 }}
+                      />
                     </span>
-                    <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
-                  </button>
+                    <motion.span
+                      animate={{ x: [0, 5, 0] }}
+                      transition={{ duration: 1.5, repeat: Infinity }}
+                    >
+                      <ArrowRight className="w-4 h-4" />
+                    </motion.span>
+                  </motion.button>
                 </div>
+
+                {/* Glow effect on hover */}
+                <motion.div
+                  className="absolute inset-0 rounded-3xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  style={{
+                    boxShadow: '0 0 40px hsl(var(--primary) / 0.15), inset 0 0 40px hsl(var(--primary) / 0.05)',
+                  }}
+                />
               </motion.div>
             ))}
           </AnimatePresence>

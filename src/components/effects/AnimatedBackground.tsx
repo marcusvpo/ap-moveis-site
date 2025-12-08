@@ -4,7 +4,7 @@ import { ReactNode, useMemo } from 'react';
 type BackgroundType = 'aurora' | 'mesh' | 'particles' | 'waves' | 'geometric' | 'gradient';
 
 interface AnimatedBackgroundProps {
-  children: ReactNode;
+  children?: ReactNode;
   type?: BackgroundType;
   className?: string;
   intensity?: 'low' | 'medium' | 'high';
@@ -239,6 +239,10 @@ const AnimatedBackground = ({
         return null;
     }
   };
+
+  if (!children) {
+    return <div className={`absolute inset-0 ${className}`}>{renderBackground()}</div>;
+  }
 
   return (
     <div className={`relative overflow-hidden ${className}`}>
