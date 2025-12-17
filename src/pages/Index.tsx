@@ -2,13 +2,17 @@ import { lazy, Suspense } from "react";
 import HeroSection from "@/components/HeroSection";
 import MainLayout from "@/components/layout/MainLayout";
 
-import banner02 from "@/assets/banners/banner-02.jpg";
-import banner04 from "@/assets/banners/banner-04.jpg";
+import bannerPromo1Desktop from "@/assets/banners_desktop/banner-qualidade-desktop.jpg";
+import bannerPromo1Mobile from "@/assets/banners_mobile/banner-qualidade-mobile.png";
+import bannerPromo2Desktop from "@/assets/banners_desktop/banner-escritorio-desktop.jpg";
+import bannerPromo2Mobile from "@/assets/banners_mobile/banner-escritorio-mobile.png";
 
 // Lazy load non-critical sections
 const AboutSection = lazy(() => import("@/components/AboutSection"));
 const ProductsSection = lazy(() => import("@/components/ProductsSection"));
-const EnvironmentsSection = lazy(() => import("@/components/EnvironmentsSection"));
+const EnvironmentsSection = lazy(
+  () => import("@/components/EnvironmentsSection")
+);
 const PromoBanner = lazy(() => import("@/components/PromoBanner"));
 
 // Loading skeleton
@@ -37,7 +41,7 @@ const Index = () => {
   return (
     <MainLayout>
       <HeroSection />
-      
+
       <Suspense fallback={<SectionSkeleton />}>
         <AboutSection />
       </Suspense>
@@ -47,7 +51,8 @@ const Index = () => {
         <section className="px-3 sm:px-4 md:px-8 lg:px-12 py-6 sm:py-8 md:py-12 bg-background">
           <div className="max-w-7xl mx-auto">
             <PromoBanner
-              image={banner02}
+              imageMobile={bannerPromo1Mobile}
+              imageDesktop={bannerPromo1Desktop}
               alt="Promoção AP Móveis - Móveis para escritório de qualidade"
             />
           </div>
@@ -63,7 +68,8 @@ const Index = () => {
         <section className="px-3 sm:px-4 md:px-8 lg:px-12 py-6 sm:py-8 md:py-12 bg-muted">
           <div className="max-w-7xl mx-auto">
             <PromoBanner
-              image={banner04}
+              imageMobile={bannerPromo2Mobile}
+              imageDesktop={bannerPromo2Desktop}
               alt="Promoção AP Móveis - Qualidade e confiança"
             />
           </div>

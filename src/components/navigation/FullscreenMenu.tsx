@@ -1,43 +1,50 @@
-import { motion, AnimatePresence } from 'framer-motion';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { useNavigation } from './NavigationContext';
-import { X, Phone, Instagram, Facebook, Linkedin, ArrowUpRight } from 'lucide-react';
-import logoAp from '@/assets/logo-ap.png';
-import { useIsMobile } from '@/hooks/use-mobile';
+import { motion, AnimatePresence } from "framer-motion";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigation } from "./NavigationContext";
+import {
+  X,
+  Phone,
+  Instagram,
+  Facebook,
+  Linkedin,
+  ArrowUpRight,
+} from "lucide-react";
+import logoAp from "@/assets/logo-ap.png";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 // Preview images
-import estacao1 from '@/assets/estacao_trabalho_1.jpeg';
-import cadeiraPresidente from '@/assets/cadeira_presidente.jpeg';
-import estacao3 from '@/assets/estacao_trabalho_3.jpeg';
+import estacao1 from "@/assets/ambientes/estacao_trabalho_1.png";
+import cadeiraPresidente from "@/assets/cadeiras/cadeira_presidente_luxo.jpg";
+import estacao3 from "@/assets/ambientes/estacao_trabalho_3.png";
 
 const menuItems = [
   {
-    number: '01',
-    label: 'Home',
-    path: '/',
+    number: "01",
+    label: "Home",
+    path: "/",
     preview: estacao1,
-    description: 'Voltar ao início',
+    description: "Voltar ao início",
   },
   {
-    number: '02',
-    label: 'Empresa',
-    path: '/empresa',
+    number: "02",
+    label: "Empresa",
+    path: "/empresa",
     preview: estacao3,
-    description: 'Nossa história e valores',
+    description: "Nossa história e valores",
   },
   {
-    number: '03',
-    label: 'Produtos',
-    path: '/produtos',
+    number: "03",
+    label: "Produtos",
+    path: "/produtos",
     preview: cadeiraPresidente,
-    description: 'Catálogo completo',
+    description: "Catálogo completo",
   },
   {
-    number: '04',
-    label: 'Contato',
-    path: '/contato',
+    number: "04",
+    label: "Contato",
+    path: "/contato",
     preview: estacao1,
-    description: 'Fale conosco',
+    description: "Fale conosco",
   },
 ];
 
@@ -56,12 +63,12 @@ const FullscreenMenu = () => {
 
   const containerVariants = {
     hidden: {
-      clipPath: 'circle(0% at calc(100% - 56px) 56px)',
+      clipPath: "circle(0% at calc(100% - 56px) 56px)",
     },
     visible: {
-      clipPath: 'circle(150% at calc(100% - 56px) 56px)',
+      clipPath: "circle(150% at calc(100% - 56px) 56px)",
       transition: {
-        type: 'spring' as const,
+        type: "spring" as const,
         stiffness: 30,
         damping: 15,
         staggerChildren: 0.08,
@@ -69,9 +76,9 @@ const FullscreenMenu = () => {
       },
     },
     exit: {
-      clipPath: 'circle(0% at calc(100% - 56px) 56px)',
+      clipPath: "circle(0% at calc(100% - 56px) 56px)",
       transition: {
-        type: 'spring' as const,
+        type: "spring" as const,
         stiffness: 50,
         damping: 20,
       },
@@ -82,14 +89,14 @@ const FullscreenMenu = () => {
     hidden: {
       opacity: 0,
       x: -100,
-      filter: 'blur(10px)',
+      filter: "blur(10px)",
     },
     visible: {
       opacity: 1,
       x: 0,
-      filter: 'blur(0px)',
+      filter: "blur(0px)",
       transition: {
-        type: 'spring' as const,
+        type: "spring" as const,
         stiffness: 100,
         damping: 15,
       },
@@ -117,7 +124,7 @@ const FullscreenMenu = () => {
               className="absolute inset-0"
               style={{
                 backgroundImage: `radial-gradient(circle at 2px 2px, currentColor 1px, transparent 0)`,
-                backgroundSize: '40px 40px',
+                backgroundSize: "40px 40px",
               }}
             />
           </div>
@@ -144,7 +151,11 @@ const FullscreenMenu = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
           >
-            <img src={logoAp} alt="AP Móveis" className="h-10 md:h-12 lg:h-16" />
+            <img
+              src={logoAp}
+              alt="AP Móveis"
+              className="h-10 md:h-12 lg:h-16"
+            />
           </motion.div>
 
           {/* Main Content - Thumb Zone Optimized */}
@@ -152,7 +163,7 @@ const FullscreenMenu = () => {
             {/* Menu Items - Bottom aligned on mobile for thumb zone */}
             <div
               className={`flex-1 flex flex-col px-6 md:px-8 lg:px-16 xl:px-24 ${
-                isMobile ? 'justify-end pb-40 pt-24' : 'justify-center'
+                isMobile ? "justify-end pb-40 pt-24" : "justify-center"
               }`}
             >
               {menuItems.map((item) => (
@@ -162,8 +173,8 @@ const FullscreenMenu = () => {
                   onClick={() => handleNavigate(item.path)}
                   className={`group flex items-center gap-4 md:gap-6 lg:gap-8 text-left py-4 md:py-3 lg:py-4 transition-all border-b border-background/10 md:border-none ${
                     location.pathname === item.path
-                      ? 'text-accent'
-                      : 'text-background/70 hover:text-background'
+                      ? "text-accent"
+                      : "text-background/70 hover:text-background"
                   }`}
                   whileHover={{ x: 20 }}
                 >
@@ -171,8 +182,8 @@ const FullscreenMenu = () => {
                   <span
                     className={`flex items-center justify-center rounded-full transition-all ${
                       isMobile
-                        ? 'w-12 h-12 bg-primary/20 text-primary text-sm font-medium'
-                        : 'w-auto h-auto text-xs md:text-sm lg:text-base font-light text-primary opacity-60 group-hover:opacity-100'
+                        ? "w-12 h-12 bg-primary/20 text-primary text-sm font-medium"
+                        : "w-auto h-auto text-xs md:text-sm lg:text-base font-light text-primary opacity-60 group-hover:opacity-100"
                     }`}
                   >
                     {item.number}
@@ -182,8 +193,8 @@ const FullscreenMenu = () => {
                   <span
                     className={`font-bold tracking-tight ${
                       isMobile
-                        ? 'text-3xl'
-                        : 'text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl'
+                        ? "text-3xl"
+                        : "text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl"
                     }`}
                   >
                     {item.label}
@@ -191,7 +202,11 @@ const FullscreenMenu = () => {
 
                   {/* Arrow - Always visible on mobile */}
                   <motion.span
-                    className={`ml-auto ${isMobile ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'} transition-opacity`}
+                    className={`ml-auto ${
+                      isMobile
+                        ? "opacity-100"
+                        : "opacity-0 group-hover:opacity-100"
+                    } transition-opacity`}
                     initial={{ x: -10 }}
                     whileHover={{ x: 0 }}
                   >
@@ -202,7 +217,7 @@ const FullscreenMenu = () => {
                   <motion.div
                     className="absolute bottom-0 left-0 h-px bg-background/30"
                     initial={{ width: 0 }}
-                    whileHover={{ width: '100%' }}
+                    whileHover={{ width: "100%" }}
                     transition={{ duration: 0.3 }}
                   />
                 </motion.button>
@@ -220,7 +235,11 @@ const FullscreenMenu = () => {
                 <motion.div
                   className="absolute inset-0 rounded-3xl overflow-hidden"
                   animate={{ rotate: [0, 2, -2, 0] }}
-                  transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+                  transition={{
+                    duration: 6,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
                 >
                   <img
                     src={estacao1}
@@ -235,7 +254,11 @@ const FullscreenMenu = () => {
                 <motion.div
                   className="absolute -top-4 -right-4 w-20 h-20 xl:w-24 xl:h-24 border-2 border-primary/30 rounded-2xl"
                   animate={{ rotate: 360 }}
-                  transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+                  transition={{
+                    duration: 20,
+                    repeat: Infinity,
+                    ease: "linear",
+                  }}
                 />
                 <motion.div
                   className="absolute -bottom-4 -left-4 w-12 h-12 xl:w-16 xl:h-16 bg-accent/20 rounded-xl"

@@ -1,12 +1,25 @@
 import { motion } from "framer-motion";
-import { Shield, MapPin, Users, Award, Clock, Building2, ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  Shield,
+  MapPin,
+  Users,
+  Award,
+  Clock,
+  Building2,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 import { useRef, useState } from "react";
 import AnimatedBackground from "./effects/AnimatedBackground";
-import ScrollReveal, { StaggerContainer, StaggerItem } from "./effects/ScrollReveal";
+import ScrollReveal, {
+  StaggerContainer,
+  StaggerItem,
+} from "./effects/ScrollReveal";
 import MorphingBlob from "./effects/MorphingBlob";
 import GradientText from "./effects/GradientText";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
+import { branches } from "@/data/branches";
 
 const bentoItems = [
   {
@@ -14,7 +27,8 @@ const bentoItems = [
     icon: Clock,
     title: "35+",
     subtitle: "Anos de Mercado",
-    description: "Tradição e experiência que se traduzem em qualidade e confiança para nossos clientes",
+    description:
+      "Tradição e experiência que se traduzem em qualidade e confiança para nossos clientes",
     span: "col-span-2 row-span-2",
     featured: true,
   },
@@ -63,7 +77,7 @@ const AboutSection = () => {
       const slideWidth = carouselRef.current.offsetWidth * 0.85;
       carouselRef.current.scrollTo({
         left: index * slideWidth,
-        behavior: 'smooth',
+        behavior: "smooth",
       });
       setActiveSlide(index);
     }
@@ -80,7 +94,11 @@ const AboutSection = () => {
   return (
     <section id="empresa" className="py-24 relative overflow-hidden">
       {/* Animated Background */}
-      <AnimatedBackground type="mesh" intensity="low" className="absolute inset-0" />
+      <AnimatedBackground
+        type="mesh"
+        intensity="low"
+        className="absolute inset-0"
+      />
 
       {/* Morphing Blobs */}
       <MorphingBlob
@@ -108,7 +126,8 @@ const AboutSection = () => {
             Quem <GradientText>Somos</GradientText>
           </h2>
           <p className="text-muted-foreground mt-4 max-w-2xl mx-auto text-lg">
-            Há mais de 35 anos transformando ambientes corporativos em espaços de sucesso
+            Há mais de 35 anos transformando ambientes corporativos em espaços
+            de sucesso
           </p>
         </ScrollReveal>
 
@@ -119,7 +138,7 @@ const AboutSection = () => {
               ref={carouselRef}
               className="flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 -mx-4 px-4"
               onScroll={handleScroll}
-              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
             >
               {bentoItems.map((item, index) => (
                 <motion.div
@@ -140,18 +159,35 @@ const AboutSection = () => {
                       whileHover={{ rotate: 10, scale: 1.1 }}
                       transition={{ type: "spring", stiffness: 300 }}
                     >
-                      <item.icon className={cn("w-10 h-10", item.iconColor || "text-primary")} />
+                      <item.icon
+                        className={cn(
+                          "w-10 h-10",
+                          item.iconColor || "text-primary"
+                        )}
+                      />
                     </motion.div>
                     <div className="mt-4">
-                      <span className={cn(
-                        "font-bold text-foreground block",
-                        item.featured ? "text-6xl" : "text-3xl"
-                      )}>
-                        {item.featured ? <GradientText animate duration={4}>{item.title}</GradientText> : item.title}
+                      <span
+                        className={cn(
+                          "font-bold text-foreground block",
+                          item.featured ? "text-6xl" : "text-3xl"
+                        )}
+                      >
+                        {item.featured ? (
+                          <GradientText animate duration={4}>
+                            {item.title}
+                          </GradientText>
+                        ) : (
+                          item.title
+                        )}
                       </span>
-                      <p className="text-lg font-semibold text-foreground mt-1">{item.subtitle}</p>
+                      <p className="text-lg font-semibold text-foreground mt-1">
+                        {item.subtitle}
+                      </p>
                       {item.description && (
-                        <p className="text-muted-foreground mt-2 text-sm">{item.description}</p>
+                        <p className="text-muted-foreground mt-2 text-sm">
+                          {item.description}
+                        </p>
                       )}
                     </div>
                   </div>
@@ -175,12 +211,24 @@ const AboutSection = () => {
                       <MapPin className="w-6 h-6 text-accent" />
                     </motion.div>
                     <div>
-                      <span className="text-2xl font-bold text-foreground">3 Filiais</span>
+                      <span className="text-2xl font-bold text-foreground">
+                        {branches.length} Filiais
+                      </span>
                       <p className="text-muted-foreground mt-2">
-                        Presente em <strong className="text-foreground">Jaboticabal</strong>,{" "}
-                        <strong className="text-foreground">Monte Alto</strong> e{" "}
-                        <strong className="text-foreground">Bebedouro</strong>. Atendemos toda a região
-                        com excelência e rapidez.
+                        Presente em{" "}
+                        {branches.map((b, i) => (
+                          <span key={b.id}>
+                            <strong className="text-foreground">
+                              {b.name}
+                            </strong>
+                            {i < branches.length - 2
+                              ? ", "
+                              : i < branches.length - 1
+                              ? " e "
+                              : ""}
+                          </span>
+                        ))}
+                        . Atendemos toda a região com excelência e rapidez.
                       </p>
                     </div>
                   </div>
@@ -190,12 +238,14 @@ const AboutSection = () => {
 
             {/* Slide Indicators */}
             <div className="flex justify-center gap-2 mt-4">
-              {[...bentoItems, { id: 'filiais' }].map((_, index) => (
+              {[...bentoItems, { id: "filiais" }].map((_, index) => (
                 <button
                   key={index}
                   className={cn(
                     "h-2 rounded-full transition-all duration-300",
-                    activeSlide === index ? "w-6 bg-primary" : "w-2 bg-muted-foreground/30"
+                    activeSlide === index
+                      ? "w-6 bg-primary"
+                      : "w-2 bg-muted-foreground/30"
                   )}
                   onClick={() => scrollToSlide(index)}
                   aria-label={`Ir para slide ${index + 1}`}
@@ -213,7 +263,9 @@ const AboutSection = () => {
                 <ChevronLeft className="w-5 h-5" />
               </button>
               <button
-                onClick={() => scrollToSlide(Math.min(bentoItems.length, activeSlide + 1))}
+                onClick={() =>
+                  scrollToSlide(Math.min(bentoItems.length, activeSlide + 1))
+                }
                 className="w-10 h-10 rounded-full bg-muted flex items-center justify-center text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-colors"
                 aria-label="Próximo"
               >
@@ -228,7 +280,10 @@ const AboutSection = () => {
             className="grid grid-cols-4 md:grid-cols-12 gap-4 md:gap-6 max-w-6xl mx-auto"
           >
             {/* Main Feature - Years (Larger, with offset) */}
-            <StaggerItem preset="scale" className="col-span-4 md:col-span-7 row-span-2 md:-mt-8">
+            <StaggerItem
+              preset="scale"
+              className="col-span-4 md:col-span-7 row-span-2 md:-mt-8"
+            >
               <motion.div
                 className="h-full glass-card glow-card p-8 rounded-3xl flex flex-col justify-between group relative overflow-hidden"
                 whileHover={{ y: -5 }}
@@ -249,12 +304,17 @@ const AboutSection = () => {
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: 0.3 }}
                   >
-                    <GradientText animate duration={4}>35+</GradientText>
+                    <GradientText animate duration={4}>
+                      35+
+                    </GradientText>
                   </motion.span>
-                  <span className="text-2xl font-semibold text-foreground">Anos de Mercado</span>
+                  <span className="text-2xl font-semibold text-foreground">
+                    Anos de Mercado
+                  </span>
                 </div>
                 <p className="text-muted-foreground mt-4">
-                  Tradição e experiência que se traduzem em qualidade e confiança para nossos clientes
+                  Tradição e experiência que se traduzem em qualidade e
+                  confiança para nossos clientes
                 </p>
 
                 {/* Shimmer effect */}
@@ -266,17 +326,25 @@ const AboutSection = () => {
                   <motion.div
                     className="absolute inset-0"
                     style={{
-                      background: 'linear-gradient(90deg, transparent, hsl(var(--primary) / 0.1), transparent)',
+                      background:
+                        "linear-gradient(90deg, transparent, hsl(var(--primary) / 0.1), transparent)",
                     }}
-                    animate={{ x: ['-100%', '100%'] }}
-                    transition={{ duration: 2, repeat: Infinity, repeatDelay: 1 }}
+                    animate={{ x: ["-100%", "100%"] }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      repeatDelay: 1,
+                    }}
                   />
                 </motion.div>
               </motion.div>
             </StaggerItem>
 
             {/* Clientes - with vertical offset */}
-            <StaggerItem preset="fade-up" className="col-span-2 md:col-span-5 md:mt-4">
+            <StaggerItem
+              preset="fade-up"
+              className="col-span-2 md:col-span-5 md:mt-4"
+            >
               <motion.div
                 className="glass-card glow-card p-6 rounded-3xl flex flex-col justify-between group h-full"
                 whileHover={{ y: -5, scale: 1.02 }}
@@ -297,13 +365,18 @@ const AboutSection = () => {
                   >
                     5.000+
                   </motion.span>
-                  <p className="text-muted-foreground text-sm mt-1">Escritórios Transformados</p>
+                  <p className="text-muted-foreground text-sm mt-1">
+                    Escritórios Transformados
+                  </p>
                 </div>
               </motion.div>
             </StaggerItem>
 
             {/* Garantia */}
-            <StaggerItem preset="fade-up" className="col-span-2 md:col-span-5 md:-mr-8">
+            <StaggerItem
+              preset="fade-up"
+              className="col-span-2 md:col-span-5 md:-mr-8"
+            >
               <motion.div
                 className="glass-card glow-card p-6 rounded-3xl flex flex-col justify-between group h-full bg-primary/5"
                 whileHover={{ y: -5, scale: 1.02 }}
@@ -316,8 +389,12 @@ const AboutSection = () => {
                   <Shield className="w-8 h-8 text-primary" />
                 </motion.div>
                 <div className="mt-4">
-                  <span className="text-2xl font-bold text-foreground">Garantia</span>
-                  <p className="text-muted-foreground text-sm mt-1">Total em Todos os Produtos</p>
+                  <span className="text-2xl font-bold text-foreground">
+                    Garantia
+                  </span>
+                  <p className="text-muted-foreground text-sm mt-1">
+                    Total em Todos os Produtos
+                  </p>
                 </div>
               </motion.div>
             </StaggerItem>
@@ -336,8 +413,12 @@ const AboutSection = () => {
                   <Award className="w-8 h-8 text-accent" />
                 </motion.div>
                 <div className="mt-4">
-                  <span className="text-2xl font-bold text-foreground">Qualidade</span>
-                  <p className="text-muted-foreground text-sm mt-1">Premium Garantida</p>
+                  <span className="text-2xl font-bold text-foreground">
+                    Qualidade
+                  </span>
+                  <p className="text-muted-foreground text-sm mt-1">
+                    Premium Garantida
+                  </p>
                 </div>
               </motion.div>
             </StaggerItem>
@@ -364,13 +445,18 @@ const AboutSection = () => {
                   >
                     500+
                   </motion.span>
-                  <p className="text-muted-foreground text-sm mt-1">Produtos no Catálogo</p>
+                  <p className="text-muted-foreground text-sm mt-1">
+                    Produtos no Catálogo
+                  </p>
                 </div>
               </motion.div>
             </StaggerItem>
 
             {/* Filiais - spans full width with overlap effect */}
-            <StaggerItem preset="fade-up" className="col-span-4 md:col-span-12 md:-ml-4 md:-mr-4">
+            <StaggerItem
+              preset="fade-up"
+              className="col-span-4 md:col-span-12 md:-ml-4 md:-mr-4"
+            >
               <motion.div
                 className="glass-card glow-card p-6 rounded-3xl group"
                 whileHover={{ y: -5 }}
@@ -385,12 +471,22 @@ const AboutSection = () => {
                     <MapPin className="w-6 h-6 text-accent" />
                   </motion.div>
                   <div>
-                    <span className="text-2xl font-bold text-foreground">3 Filiais</span>
+                    <span className="text-2xl font-bold text-foreground">
+                      {branches.length} Filiais
+                    </span>
                     <p className="text-muted-foreground mt-2">
-                      Presente em <strong className="text-foreground">Jaboticabal</strong>,{" "}
-                      <strong className="text-foreground">Monte Alto</strong> e{" "}
-                      <strong className="text-foreground">Bebedouro</strong>. Atendemos toda a região
-                      com excelência e rapidez.
+                      Presente em{" "}
+                      {branches.map((b, i) => (
+                        <span key={b.id}>
+                          <strong className="text-foreground">{b.name}</strong>
+                          {i < branches.length - 2
+                            ? ", "
+                            : i < branches.length - 1
+                            ? " e "
+                            : ""}
+                        </span>
+                      ))}
+                      . Atendemos toda a região com excelência e rapidez.
                     </p>
                   </div>
                 </div>

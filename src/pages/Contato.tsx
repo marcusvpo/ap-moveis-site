@@ -1,8 +1,15 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { MapPin, Phone, Clock, MessageCircle, Mail, ChevronRight } from 'lucide-react';
-import MainLayout from '@/components/layout/MainLayout';
-import { branches, Branch } from '@/data/branches';
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  MapPin,
+  Phone,
+  Clock,
+  MessageCircle,
+  Mail,
+  ChevronRight,
+} from "lucide-react";
+import MainLayout from "@/components/layout/MainLayout";
+import { branches, Branch } from "@/data/branches";
 
 const Contato = () => {
   const [activeBranch, setActiveBranch] = useState<Branch>(branches[0]);
@@ -13,9 +20,9 @@ const Contato = () => {
       opacity: 1,
       transition: {
         staggerChildren: 0.1,
-        delayChildren: 0.2
-      }
-    }
+        delayChildren: 0.2,
+      },
+    },
   };
 
   const itemVariants = {
@@ -26,9 +33,9 @@ const Contato = () => {
       transition: {
         type: "spring" as const,
         stiffness: 100,
-        damping: 15
-      }
-    }
+        damping: 15,
+      },
+    },
   };
 
   return (
@@ -37,7 +44,7 @@ const Contato = () => {
       <section className="relative pt-24 md:pt-32 pb-12 md:pb-16 px-4 md:px-6 lg:px-12 overflow-hidden">
         {/* Background */}
         <div className="absolute inset-0 bg-gradient-to-b from-muted to-background" />
-        
+
         {/* Pattern */}
         <div className="absolute inset-0 opacity-50">
           <div className="absolute top-20 right-10 md:right-20 w-48 md:w-72 h-48 md:h-72 bg-primary/10 rounded-full blur-3xl" />
@@ -74,8 +81,8 @@ const Contato = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
           >
-            Escolha a filial mais próxima de você e entre em contato. 
-            Estamos prontos para atendê-lo!
+            Escolha a filial mais próxima de você e entre em contato. Estamos
+            prontos para atendê-lo!
           </motion.p>
         </motion.div>
       </section>
@@ -95,8 +102,8 @@ const Contato = () => {
                 onClick={() => setActiveBranch(branch)}
                 className={`relative px-4 md:px-6 py-2 md:py-3 rounded-full font-medium transition-all text-sm md:text-base min-h-[44px] ${
                   activeBranch.id === branch.id
-                    ? 'bg-primary text-primary-foreground'
-                    : 'bg-muted text-muted-foreground hover:bg-muted/80'
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-muted text-muted-foreground hover:bg-muted/80"
                 }`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -137,8 +144,12 @@ const Contato = () => {
                     <MapPin className="w-5 h-5 md:w-6 md:h-6 text-primary" />
                   </div>
                   <div>
-                    <span className="text-xs md:text-sm text-muted-foreground">Filial</span>
-                    <h2 className="text-xl md:text-2xl font-bold text-foreground">{activeBranch.name}</h2>
+                    <span className="text-xs md:text-sm text-muted-foreground">
+                      Filial
+                    </span>
+                    <h2 className="text-xl md:text-2xl font-bold text-foreground">
+                      {activeBranch.name}
+                    </h2>
                   </div>
                 </div>
 
@@ -149,10 +160,18 @@ const Contato = () => {
                       <MapPin className="w-4 h-4 md:w-5 md:h-5 text-primary" />
                     </div>
                     <div>
-                      <span className="text-xs md:text-sm text-muted-foreground">Endereço</span>
-                      <p className="text-foreground font-medium text-sm md:text-base">{activeBranch.address}</p>
-                      <p className="text-muted-foreground text-sm">{activeBranch.neighborhood}</p>
-                      <p className="text-muted-foreground text-sm">{activeBranch.city}</p>
+                      <span className="text-xs md:text-sm text-muted-foreground">
+                        Endereço
+                      </span>
+                      <p className="text-foreground font-medium text-sm md:text-base">
+                        {activeBranch.address}
+                      </p>
+                      <p className="text-muted-foreground text-sm">
+                        {activeBranch.neighborhood}
+                      </p>
+                      <p className="text-muted-foreground text-sm">
+                        {activeBranch.city}
+                      </p>
                     </div>
                   </div>
 
@@ -162,9 +181,11 @@ const Contato = () => {
                       <Phone className="w-4 h-4 md:w-5 md:h-5 text-primary" />
                     </div>
                     <div>
-                      <span className="text-xs md:text-sm text-muted-foreground">Telefone</span>
-                      <a 
-                        href={`tel:${activeBranch.phone.replace(/\D/g, '')}`}
+                      <span className="text-xs md:text-sm text-muted-foreground">
+                        Telefone
+                      </span>
+                      <a
+                        href={`tel:${activeBranch.phone.replace(/\D/g, "")}`}
                         className="block text-foreground font-medium hover:text-primary transition-colors text-sm md:text-base"
                       >
                         {activeBranch.phone}
@@ -178,8 +199,10 @@ const Contato = () => {
                       <MessageCircle className="w-4 h-4 md:w-5 md:h-5 text-primary" />
                     </div>
                     <div>
-                      <span className="text-xs md:text-sm text-muted-foreground">WhatsApp</span>
-                      <a 
+                      <span className="text-xs md:text-sm text-muted-foreground">
+                        WhatsApp
+                      </span>
+                      <a
                         href={`https://wa.me/${activeBranch.whatsapp}`}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -196,9 +219,15 @@ const Contato = () => {
                       <Clock className="w-4 h-4 md:w-5 md:h-5 text-primary" />
                     </div>
                     <div>
-                      <span className="text-xs md:text-sm text-muted-foreground">Horário de Funcionamento</span>
-                      <p className="text-foreground font-medium text-sm md:text-base">Segunda a Sexta: 8h às 18h</p>
-                      <p className="text-muted-foreground text-sm">Sábado: 8h às 12h</p>
+                      <span className="text-xs md:text-sm text-muted-foreground">
+                        Horário de Funcionamento
+                      </span>
+                      <p className="text-foreground font-medium text-sm md:text-base">
+                        Segunda a Sexta: 8h às 18h
+                      </p>
+                      <p className="text-muted-foreground text-sm">
+                        Sábado: 8h às 12h
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -217,7 +246,7 @@ const Contato = () => {
                     WhatsApp
                   </motion.a>
                   <motion.a
-                    href={`tel:${activeBranch.phone.replace(/\D/g, '')}`}
+                    href={`tel:${activeBranch.phone.replace(/\D/g, "")}`}
                     className="flex-1 flex items-center justify-center gap-2 bg-primary text-primary-foreground px-4 md:px-6 py-3 md:py-4 rounded-xl font-semibold hover:bg-primary-dark transition-colors min-h-[48px] text-sm md:text-base"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
@@ -237,7 +266,7 @@ const Contato = () => {
                   src={`https://www.google.com/maps?q=${activeBranch.coordinates.lat},${activeBranch.coordinates.lng}&z=15&output=embed`}
                   width="100%"
                   height="100%"
-                  style={{ border: 0, minHeight: '300px' }}
+                  style={{ border: 0, minHeight: "300px" }}
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
@@ -306,10 +335,10 @@ const Contato = () => {
             Envie sua mensagem e retornaremos em até 24 horas
           </p>
           <a
-            href="mailto:contato@apmoveis.com.br"
+            href="mailto:comercial@apmoveis.com.br"
             className="inline-flex items-center gap-2 bg-accent text-accent-foreground px-5 md:px-6 py-2 md:py-3 rounded-full font-semibold hover:bg-accent-hover transition-colors text-sm md:text-base min-h-[44px]"
           >
-            contato@apmoveis.com.br
+            comercial@apmoveis.com.br
           </a>
         </motion.div>
       </section>

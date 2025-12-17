@@ -1,28 +1,66 @@
-import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { Target, Eye, Heart, MapPin, Clock, Building2, Users, Award } from 'lucide-react';
-import MainLayout from '@/components/layout/MainLayout';
-import PromoBanner from '@/components/PromoBanner';
-import banner05 from '@/assets/banners/banner-05.jpg';
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import {
+  Target,
+  Eye,
+  Heart,
+  MapPin,
+  Clock,
+  Building2,
+  Users,
+  Award,
+} from "lucide-react";
+import MainLayout from "@/components/layout/MainLayout";
+import PromoBanner from "@/components/PromoBanner";
+import bannerDesktop from "@/assets/banners_desktop/banner-estacao-desktop.jpg";
+import bannerMobile from "@/assets/banners_mobile/banner-estacao-mobile.png";
+import { branches } from "@/data/branches";
+import ProgressiveImage from "@/components/ProgressiveImage";
 
 const values = [
-  { icon: Heart, title: 'Paixão', description: 'Amamos o que fazemos e isso reflete em cada produto' },
-  { icon: Users, title: 'Compromisso', description: 'Nosso cliente é nossa prioridade número um' },
-  { icon: Award, title: 'Qualidade', description: 'Excelência em cada detalhe, do design à entrega' },
-  { icon: Building2, title: 'Inovação', description: 'Sempre buscando as melhores soluções do mercado' },
+  {
+    icon: Heart,
+    title: "Paixão",
+    description: "Amamos o que fazemos e isso reflete em cada produto",
+  },
+  {
+    icon: Users,
+    title: "Compromisso",
+    description: "Nosso cliente é nossa prioridade número um",
+  },
+  {
+    icon: Award,
+    title: "Qualidade",
+    description: "Excelência em cada detalhe, do design à entrega",
+  },
+  {
+    icon: Building2,
+    title: "Inovação",
+    description: "Sempre buscando as melhores soluções do mercado",
+  },
 ];
 
 const timeline = [
-  { year: '1989', title: 'Fundação', description: 'Início das atividades em Jaboticabal' },
-  { year: '2005', title: 'Expansão', description: 'Inauguração da filial de Monte Alto' },
-  { year: '2015', title: 'Crescimento', description: 'Nova filial em Bebedouro' },
-  { year: '2024', title: 'Consolidação', description: '+5.000 escritórios transformados' },
-];
-
-const branches = [
-  { city: 'Jaboticabal', since: '1989', address: 'Rua São Sebastião, 122 - Centro' },
-  { city: 'Monte Alto', since: '2005', address: 'Rua Nhonho do Livramento, 2155 - Centro' },
-  { city: 'Bebedouro', since: '2015', address: 'Av. Edne José Piffer, 561 - Res. Hércules Hortal' },
+  {
+    year: "1989",
+    title: "Fundação",
+    description: "Início das atividades em Jaboticabal",
+  },
+  {
+    year: "2005",
+    title: "Expansão",
+    description: "Inauguração da filial de Monte Alto",
+  },
+  {
+    year: "2015",
+    title: "Crescimento",
+    description: "Nova filial em Bebedouro",
+  },
+  {
+    year: "2024",
+    title: "Consolidação",
+    description: "+5.000 escritórios transformados",
+  },
 ];
 
 const containerVariants = {
@@ -31,9 +69,9 @@ const containerVariants = {
     opacity: 1,
     transition: {
       staggerChildren: 0.1,
-      delayChildren: 0.2
-    }
-  }
+      delayChildren: 0.2,
+    },
+  },
 };
 
 const itemVariants = {
@@ -44,9 +82,9 @@ const itemVariants = {
     transition: {
       type: "spring" as const,
       stiffness: 100,
-      damping: 15
-    }
-  }
+      damping: 15,
+    },
+  },
 };
 
 const Empresa = () => {
@@ -56,13 +94,16 @@ const Empresa = () => {
       <section className="relative min-h-[60vh] md:min-h-[70vh] flex items-center justify-center overflow-hidden">
         {/* Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary-dark to-foreground" />
-        
+
         {/* Pattern */}
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
-            backgroundSize: '40px 40px md:60px md:60px'
-          }} />
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
+              backgroundSize: "40px 40px",
+            }}
+          />
         </div>
 
         {/* Content */}
@@ -98,7 +139,8 @@ const Empresa = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
           >
-            Há mais de 35 anos criando ambientes de trabalho que inspiram produtividade e bem-estar
+            Há mais de 35 anos criando ambientes de trabalho que inspiram
+            produtividade e bem-estar
           </motion.p>
 
           {/* Animated Counter */}
@@ -109,18 +151,30 @@ const Empresa = () => {
             transition={{ delay: 0.7 }}
           >
             <div className="text-center">
-              <span className="block text-3xl md:text-4xl lg:text-5xl font-bold text-accent">35+</span>
-              <span className="text-primary-foreground/70 text-xs md:text-sm">Anos</span>
+              <span className="block text-3xl md:text-4xl lg:text-5xl font-bold text-accent">
+                35+
+              </span>
+              <span className="text-primary-foreground/70 text-xs md:text-sm">
+                Anos
+              </span>
             </div>
             <div className="h-8 md:h-12 w-px bg-primary-foreground/20" />
             <div className="text-center">
-              <span className="block text-3xl md:text-4xl lg:text-5xl font-bold text-accent">5.000+</span>
-              <span className="text-primary-foreground/70 text-xs md:text-sm">Clientes</span>
+              <span className="block text-3xl md:text-4xl lg:text-5xl font-bold text-accent">
+                5.000+
+              </span>
+              <span className="text-primary-foreground/70 text-xs md:text-sm">
+                Clientes
+              </span>
             </div>
             <div className="h-8 md:h-12 w-px bg-primary-foreground/20" />
             <div className="text-center">
-              <span className="block text-3xl md:text-4xl lg:text-5xl font-bold text-accent">3</span>
-              <span className="text-primary-foreground/70 text-xs md:text-sm">Filiais</span>
+              <span className="block text-3xl md:text-4xl lg:text-5xl font-bold text-accent">
+                3
+              </span>
+              <span className="text-primary-foreground/70 text-xs md:text-sm">
+                Filiais
+              </span>
             </div>
           </motion.div>
         </motion.div>
@@ -172,10 +226,14 @@ const Empresa = () => {
                 transition={{ duration: 4, repeat: Infinity }}
               />
               <Target className="w-10 h-10 md:w-12 md:h-12 text-accent mb-4 md:mb-6" />
-              <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-primary-foreground mb-3 md:mb-4">Missão</h3>
+              <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-primary-foreground mb-3 md:mb-4">
+                Missão
+              </h3>
               <p className="text-primary-foreground/80 text-base md:text-lg leading-relaxed">
-                Fornecer soluções completas em mobiliário corporativo, unindo design, ergonomia e qualidade 
-                para criar ambientes de trabalho que impulsionam a produtividade e o bem-estar dos nossos clientes.
+                Fornecer soluções completas em mobiliário corporativo, unindo
+                design, ergonomia e qualidade para criar ambientes de trabalho
+                que impulsionam a produtividade e o bem-estar dos nossos
+                clientes.
               </p>
             </motion.div>
 
@@ -185,10 +243,13 @@ const Empresa = () => {
               className="group relative bg-muted rounded-2xl md:rounded-3xl p-6 md:p-8 lg:p-12 overflow-hidden border border-border"
             >
               <Eye className="w-10 h-10 md:w-12 md:h-12 text-primary mb-4 md:mb-6" />
-              <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-foreground mb-3 md:mb-4">Visão</h3>
+              <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-foreground mb-3 md:mb-4">
+                Visão
+              </h3>
               <p className="text-muted-foreground text-base md:text-lg leading-relaxed">
-                Ser reconhecida como a principal referência em móveis para escritórios na região, 
-                expandindo nossa presença e mantendo o compromisso com a excelência e satisfação do cliente.
+                Ser reconhecida como a principal referência em móveis para
+                escritórios na região, expandindo nossa presença e mantendo o
+                compromisso com a excelência e satisfação do cliente.
               </p>
             </motion.div>
           </motion.div>
@@ -214,8 +275,12 @@ const Empresa = () => {
                 >
                   <value.icon className="w-6 h-6 md:w-7 md:h-7 text-primary" />
                 </motion.div>
-                <h4 className="text-lg md:text-xl font-bold text-foreground mb-1 md:mb-2">{value.title}</h4>
-                <p className="text-muted-foreground text-sm md:text-base">{value.description}</p>
+                <h4 className="text-lg md:text-xl font-bold text-foreground mb-1 md:mb-2">
+                  {value.title}
+                </h4>
+                <p className="text-muted-foreground text-sm md:text-base">
+                  {value.description}
+                </p>
               </motion.div>
             ))}
           </motion.div>
@@ -225,9 +290,10 @@ const Empresa = () => {
       {/* Banner promocional */}
       <section className="px-4 md:px-8 lg:px-12 py-8 md:py-12 bg-muted">
         <div className="max-w-7xl mx-auto">
-          <PromoBanner 
-            image={banner05} 
-            alt="Promoção AP Móveis - Qualidade que dura, investimento que retorna" 
+          <PromoBanner
+            imageMobile={bannerMobile}
+            imageDesktop={bannerDesktop}
+            alt="Promoção AP Móveis - Qualidade que dura, investimento que retorna"
           />
         </div>
       </section>
@@ -258,26 +324,31 @@ const Empresa = () => {
           >
             {branches.map((branch, index) => (
               <motion.div
-                key={branch.city}
+                key={branch.id}
                 variants={itemVariants}
                 className="group relative bg-card rounded-2xl md:rounded-3xl overflow-hidden border border-border hover:border-primary/30 transition-all"
                 whileHover={{ y: -10 }}
               >
-                {/* Placeholder for Image */}
-                <div className="aspect-[4/3] bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center">
-                  <div className="text-center">
-                    <Building2 className="w-12 h-12 md:w-16 md:h-16 text-primary/30 mx-auto mb-3 md:mb-4" />
-                    <span className="text-muted-foreground text-xs md:text-sm">Foto da filial</span>
-                  </div>
+                {/* Image */}
+                <div className="aspect-[815/785] bg-muted relative overflow-hidden">
+                  <ProgressiveImage
+                    src={branch.image}
+                    alt={`Filial ${branch.name}`}
+                    className="w-full h-full"
+                    imgClassName="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
 
                 {/* Content */}
                 <div className="p-4 md:p-6">
                   <div className="flex items-center gap-2 text-primary font-medium text-xs md:text-sm mb-2">
                     <Clock className="w-3 h-3 md:w-4 md:h-4" />
-                    <span>Desde {branch.since}</span>
+                    <span>Desde {branch.openedIn}</span>
                   </div>
-                  <h3 className="text-xl md:text-2xl font-bold text-foreground mb-2">{branch.city}</h3>
+                  <h3 className="text-xl md:text-2xl font-bold text-foreground mb-2">
+                    {branch.name}
+                  </h3>
                   <div className="flex items-start gap-2 text-muted-foreground text-sm">
                     <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" />
                     <span>{branch.address}</span>
@@ -322,7 +393,7 @@ const Empresa = () => {
               <motion.div
                 key={item.year}
                 className={`relative flex items-center gap-6 md:gap-8 mb-8 md:mb-12 ${
-                  index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
+                  index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
                 }`}
                 initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -337,10 +408,20 @@ const Empresa = () => {
                 />
 
                 {/* Content */}
-                <div className={`flex-1 ${index % 2 === 0 ? 'md:text-right md:pr-12' : 'md:pl-12'} pl-12 md:pl-0`}>
-                  <span className="text-accent font-bold text-xl md:text-2xl">{item.year}</span>
-                  <h3 className="text-lg md:text-xl font-bold text-foreground mt-1">{item.title}</h3>
-                  <p className="text-muted-foreground mt-1 md:mt-2 text-sm md:text-base">{item.description}</p>
+                <div
+                  className={`flex-1 ${
+                    index % 2 === 0 ? "md:text-right md:pr-12" : "md:pl-12"
+                  } pl-12 md:pl-0`}
+                >
+                  <span className="text-accent font-bold text-xl md:text-2xl">
+                    {item.year}
+                  </span>
+                  <h3 className="text-lg md:text-xl font-bold text-foreground mt-1">
+                    {item.title}
+                  </h3>
+                  <p className="text-muted-foreground mt-1 md:mt-2 text-sm md:text-base">
+                    {item.description}
+                  </p>
                 </div>
 
                 {/* Spacer for alternating layout */}

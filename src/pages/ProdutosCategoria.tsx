@@ -1,42 +1,57 @@
-import { useState, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Link, useParams } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, MessageCircle, ChevronRight, Filter } from 'lucide-react';
-import MainLayout from '@/components/layout/MainLayout';
-import PromoBanner from '@/components/PromoBanner';
-import { categories, getProductsByCategory, ProductCategory } from '@/data/products';
-import banner06 from '@/assets/banners/banner-06.jpg';
-import banner07 from '@/assets/banners/banner-07.jpg';
+import { useState, useMemo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Link, useParams } from "react-router-dom";
+import {
+  ArrowLeft,
+  ArrowRight,
+  MessageCircle,
+  ChevronRight,
+  Filter,
+} from "lucide-react";
+import MainLayout from "@/components/layout/MainLayout";
+import PromoBanner from "@/components/PromoBanner";
+import {
+  categories,
+  getProductsByCategory,
+  ProductCategory,
+} from "@/data/products";
+import bannerCadeirasDesktop from "@/assets/banners_desktop/banner-cadeiragoah-desktop.jpg";
+import bannerCadeirasMobile from "@/assets/banners_mobile/banner-cadeiragoah-mobile.png";
+import bannerAmbientesDesktop from "@/assets/banners_desktop/banner-estacao-desktop.jpg";
+import bannerAmbientesMobile from "@/assets/banners_mobile/banner-estacao-mobile.png";
 
 const ProdutosCategoria = () => {
   const { categoria } = useParams<{ categoria: string }>();
-  const [activeFilter, setActiveFilter] = useState<string>('todos');
+  const [activeFilter, setActiveFilter] = useState<string>("todos");
   const [hoveredProduct, setHoveredProduct] = useState<string | null>(null);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
-  const category = categories.find(c => c.id === categoria);
-  const categoryProducts = useMemo(() => 
-    getProductsByCategory(categoria as ProductCategory), 
+  const category = categories.find((c) => c.id === categoria);
+  const categoryProducts = useMemo(
+    () => getProductsByCategory(categoria as ProductCategory),
     [categoria]
   );
 
   // Get unique subcategories
   const subcategories = useMemo(() => {
     const subs = categoryProducts
-      .map(p => p.subcategory)
+      .map((p) => p.subcategory)
       .filter((v, i, a) => v && a.indexOf(v) === i) as string[];
-    return ['todos', ...subs];
+    return ["todos", ...subs];
   }, [categoryProducts]);
 
   // Filter products
   const filteredProducts = useMemo(() => {
-    if (activeFilter === 'todos') return categoryProducts;
-    return categoryProducts.filter(p => p.subcategory === activeFilter);
+    if (activeFilter === "todos") return categoryProducts;
+    return categoryProducts.filter((p) => p.subcategory === activeFilter);
   }, [categoryProducts, activeFilter]);
 
   // Get category-specific banner
   const getCategoryBanner = () => {
-    if (categoria === 'cadeiras') return banner06;
-    if (categoria === 'ambientes') return banner07;
+    if (categoria === "cadeiras")
+      return { desktop: bannerCadeirasDesktop, mobile: bannerCadeirasMobile };
+    if (categoria === "ambientes")
+      return { desktop: bannerAmbientesDesktop, mobile: bannerAmbientesMobile };
     return null;
   };
 
@@ -47,9 +62,9 @@ const ProdutosCategoria = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.08
-      }
-    }
+        staggerChildren: 0.08,
+      },
+    },
   };
 
   const itemVariants = {
@@ -61,14 +76,14 @@ const ProdutosCategoria = () => {
       transition: {
         type: "spring" as const,
         stiffness: 100,
-        damping: 15
-      }
+        damping: 15,
+      },
     },
     exit: {
       opacity: 0,
       scale: 0.9,
-      transition: { duration: 0.2 }
-    }
+      transition: { duration: 0.2 },
+    },
   };
 
   if (!category) {
@@ -76,7 +91,9 @@ const ProdutosCategoria = () => {
       <MainLayout>
         <div className="min-h-screen flex items-center justify-center px-4">
           <div className="text-center">
-            <h1 className="text-xl md:text-2xl font-bold text-foreground mb-4">Categoria não encontrada</h1>
+            <h1 className="text-xl md:text-2xl font-bold text-foreground mb-4">
+              Categoria não encontrada
+            </h1>
             <Link to="/produtos" className="text-primary hover:underline">
               Voltar para Produtos
             </Link>
@@ -92,8 +109,8 @@ const ProdutosCategoria = () => {
       <section className="relative pt-20 md:pt-28 pb-12 md:pb-16 px-4 md:px-6 lg:px-12 overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0">
-          <img 
-            src={category.image} 
+          <img
+            src={category.image}
             alt={category.name}
             className="w-full h-full object-cover"
             loading="eager"
@@ -108,9 +125,19 @@ const ProdutosCategoria = () => {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <Link to="/" className="hover:text-primary-foreground transition-colors">Home</Link>
+            <Link
+              to="/"
+              className="hover:text-primary-foreground transition-colors"
+            >
+              Home
+            </Link>
             <ChevronRight className="w-3 h-3 md:w-4 md:h-4" />
-            <Link to="/produtos" className="hover:text-primary-foreground transition-colors">Produtos</Link>
+            <Link
+              to="/produtos"
+              className="hover:text-primary-foreground transition-colors"
+            >
+              Produtos
+            </Link>
             <ChevronRight className="w-3 h-3 md:w-4 md:h-4" />
             <span className="text-accent">{category.name}</span>
           </motion.nav>
@@ -132,7 +159,7 @@ const ProdutosCategoria = () => {
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-3 md:mb-4">
                 {category.name}
               </h1>
-              
+
               <p className="text-base md:text-lg text-primary-foreground/70 max-w-xl">
                 {category.description}
               </p>
@@ -158,9 +185,10 @@ const ProdutosCategoria = () => {
       {categoryBanner && (
         <section className="px-4 md:px-8 lg:px-12 py-6 md:py-8 bg-background">
           <div className="max-w-7xl mx-auto">
-            <PromoBanner 
-              image={categoryBanner} 
-              alt={`Promoção AP Móveis - ${category.name}`} 
+            <PromoBanner
+              imageMobile={categoryBanner.mobile}
+              imageDesktop={categoryBanner.desktop}
+              alt={`Promoção AP Móveis - ${category.name}`}
             />
           </div>
         </section>
@@ -173,7 +201,9 @@ const ProdutosCategoria = () => {
             <div className="flex items-center gap-3 md:gap-4 overflow-x-auto pb-2 scrollbar-hide">
               <div className="flex items-center gap-2 text-muted-foreground flex-shrink-0">
                 <Filter className="w-4 h-4" />
-                <span className="text-xs md:text-sm font-medium whitespace-nowrap">Filtrar:</span>
+                <span className="text-xs md:text-sm font-medium whitespace-nowrap">
+                  Filtrar:
+                </span>
               </div>
               {subcategories.map((sub) => (
                 <motion.button
@@ -181,13 +211,15 @@ const ProdutosCategoria = () => {
                   onClick={() => setActiveFilter(sub)}
                   className={`px-3 md:px-4 py-1.5 md:py-2 rounded-full text-xs md:text-sm font-medium whitespace-nowrap transition-all min-h-[36px] ${
                     activeFilter === sub
-                      ? 'bg-primary text-primary-foreground'
-                      : 'bg-background text-muted-foreground hover:bg-background/80'
+                      ? "bg-primary text-primary-foreground"
+                      : "bg-background text-muted-foreground hover:bg-background/80"
                   }`}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  {sub === 'todos' ? 'Todos' : sub.charAt(0).toUpperCase() + sub.slice(1)}
+                  {sub === "todos"
+                    ? "Todos"
+                    : sub.charAt(0).toUpperCase() + sub.slice(1)}
                 </motion.button>
               ))}
             </div>
@@ -201,83 +233,48 @@ const ProdutosCategoria = () => {
           <AnimatePresence mode="wait">
             <motion.div
               key={activeFilter}
-              className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-4 lg:gap-6"
+              className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
               variants={containerVariants}
               initial="hidden"
               animate="visible"
               exit="hidden"
             >
-              {filteredProducts.map((product) => (
+              {filteredProducts.map((product, index) => (
                 <motion.div
                   key={product.id}
                   variants={itemVariants}
                   layout
-                  className="group"
-                  onMouseEnter={() => setHoveredProduct(product.id)}
-                  onMouseLeave={() => setHoveredProduct(null)}
+                  className="group relative"
                 >
-                  <div className="relative bg-card rounded-xl md:rounded-2xl overflow-hidden border border-border hover:border-primary/30 transition-all shadow-soft hover:shadow-glow">
-                    {/* Image */}
-                    <div className="relative aspect-square overflow-hidden bg-muted">
-                      <motion.img
-                        src={product.image}
-                        alt={product.name}
-                        className="w-full h-full object-cover"
-                        animate={{
-                          scale: hoveredProduct === product.id ? 1.1 : 1
-                        }}
-                        transition={{ duration: 0.4 }}
-                        loading="lazy"
-                      />
+                  <div
+                    className="relative aspect-square overflow-hidden rounded-xl bg-muted cursor-zoom-in"
+                    onClick={() => setSelectedIndex(index)}
+                  >
+                    <motion.img
+                      src={product.image}
+                      alt={product.name}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      loading="lazy"
+                    />
 
-                      {/* Quick features overlay - Desktop only */}
-                      <motion.div
-                        className="hidden md:flex absolute inset-0 bg-foreground/80 flex-col items-center justify-center p-4"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: hoveredProduct === product.id ? 1 : 0 }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        <span className="text-accent font-medium text-sm mb-3">Características</span>
-                        <ul className="text-primary-foreground text-sm space-y-1 text-center">
-                          {product.features.slice(0, 4).map((feature, i) => (
-                            <li key={i}>• {feature}</li>
-                          ))}
-                        </ul>
-                      </motion.div>
+                    {/* Hover Overlay */}
+                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  </div>
 
-                      {/* Subcategory badge */}
-                      {product.subcategory && (
-                        <span className="absolute top-2 left-2 md:top-3 md:left-3 bg-primary/90 text-primary-foreground px-2 md:px-3 py-0.5 md:py-1 rounded-full text-[10px] md:text-xs font-medium capitalize">
-                          {product.subcategory}
-                        </span>
-                      )}
-                    </div>
-
-                    {/* Content */}
-                    <div className="p-3 md:p-5">
-                      <h3 className="text-sm md:text-lg font-bold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors line-clamp-1">
-                        {product.name}
-                      </h3>
-                      
-                      {product.description && (
-                        <p className="hidden md:block text-sm text-muted-foreground mb-4 line-clamp-2">
-                          {product.description}
-                        </p>
-                      )}
-
-                      <motion.a
-                        href={`https://wa.me/5516320270220?text=Olá! Tenho interesse no produto: ${product.name}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-1 md:gap-2 w-full bg-accent text-accent-foreground py-2 md:py-3 rounded-lg md:rounded-xl font-semibold hover:bg-accent-hover transition-colors text-xs md:text-base min-h-[40px]"
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                      >
-                        <MessageCircle className="w-3 h-3 md:w-4 md:h-4" />
-                        <span className="hidden sm:inline">Solicitar Orçamento</span>
-                        <span className="sm:hidden">Orçamento</span>
-                      </motion.a>
-                    </div>
+                  {/* Compact Action Bar */}
+                  <div className="absolute top-2 right-2 flex gap-2">
+                    <motion.a
+                      href={`https://wa.me/5516320270220?text=Olá! Tenho interesse no produto: ${product.name}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1.5 bg-accent/90 backdrop-blur-sm text-accent-foreground px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg hover:bg-accent transition-colors"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <MessageCircle className="w-3.5 h-3.5" />
+                      <span>Orçar</span>
+                    </motion.a>
                   </div>
                 </motion.div>
               ))}
@@ -285,18 +282,107 @@ const ProdutosCategoria = () => {
           </AnimatePresence>
 
           {filteredProducts.length === 0 && (
-            <motion.div
-              className="text-center py-12 md:py-16"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-            >
-              <p className="text-muted-foreground text-base md:text-lg">
+            <div className="text-center py-12">
+              <p className="text-muted-foreground">
                 Nenhum produto encontrado nesta categoria.
               </p>
-            </motion.div>
+            </div>
           )}
         </div>
       </section>
+
+      {/* Lightbox */}
+      <AnimatePresence>
+        {selectedIndex !== null && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4"
+            onClick={() => setSelectedIndex(null)}
+          >
+            {/* Close Button */}
+            <button
+              onClick={() => setSelectedIndex(null)}
+              className="absolute top-4 right-4 text-white/70 hover:text-white p-2"
+            >
+              <span className="sr-only">Fechar</span>
+              <svg
+                className="w-8 h-8"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+
+            {/* Navigation */}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setSelectedIndex((prev) =>
+                  prev !== null
+                    ? (prev - 1 + filteredProducts.length) %
+                      filteredProducts.length
+                    : null
+                );
+              }}
+              className="absolute left-4 text-white/70 hover:text-white p-2 hidden md:block"
+            >
+              <ArrowLeft className="w-8 h-8" />
+            </button>
+
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setSelectedIndex((prev) =>
+                  prev !== null ? (prev + 1) % filteredProducts.length : null
+                );
+              }}
+              className="absolute right-4 text-white/70 hover:text-white p-2 hidden md:block"
+            >
+              <ArrowRight className="w-8 h-8" />
+            </button>
+
+            {/* Image */}
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="relative max-w-5xl max-h-[85vh] rounded-lg overflow-hidden"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={filteredProducts[selectedIndex].image}
+                alt={filteredProducts[selectedIndex].name}
+                className="w-full h-full object-contain"
+              />
+
+              {/* Product Info in Lightbox */}
+              <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 to-transparent p-6 text-white">
+                <h3 className="text-xl font-bold mb-2">
+                  {filteredProducts[selectedIndex].name}
+                </h3>
+                <a
+                  href={`https://wa.me/5516320270220?text=Olá! Tenho interesse no produto: ${filteredProducts[selectedIndex].name}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-accent text-accent-foreground px-4 py-2 rounded-full text-sm font-semibold hover:bg-accent-hover transition-colors"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  Solicitar Orçamento
+                </a>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Other Categories */}
       <section className="px-4 md:px-6 lg:px-12 py-12 md:py-16 bg-muted">
@@ -307,7 +393,7 @@ const ProdutosCategoria = () => {
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4">
             {categories
-              .filter(c => c.id !== categoria)
+              .filter((c) => c.id !== categoria)
               .map((cat, index) => (
                 <motion.div
                   key={cat.id}
@@ -320,8 +406,8 @@ const ProdutosCategoria = () => {
                     to={`/produtos/${cat.id}`}
                     className="group block relative aspect-[4/3] rounded-lg md:rounded-xl overflow-hidden"
                   >
-                    <img 
-                      src={cat.image} 
+                    <img
+                      src={cat.image}
                       alt={cat.name}
                       className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                       loading="lazy"

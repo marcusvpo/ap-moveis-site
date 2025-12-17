@@ -1,10 +1,11 @@
-import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { ArrowRight, Sparkles } from 'lucide-react';
-import MainLayout from '@/components/layout/MainLayout';
-import PromoBanner from '@/components/PromoBanner';
-import { categories } from '@/data/products';
-import banner03 from '@/assets/banners/banner-03.jpg';
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { ArrowRight, Sparkles } from "lucide-react";
+import MainLayout from "@/components/layout/MainLayout";
+import PromoBanner from "@/components/PromoBanner";
+import { categories } from "@/data/products";
+import bannerDesktop from "@/assets/banners_desktop/banner-basico-desktop.jpg";
+import bannerMobile from "@/assets/banners_mobile/banner-basico-mobile.png";
 
 const Produtos = () => {
   const containerVariants = {
@@ -13,9 +14,9 @@ const Produtos = () => {
       opacity: 1,
       transition: {
         staggerChildren: 0.1,
-        delayChildren: 0.3
-      }
-    }
+        delayChildren: 0.3,
+      },
+    },
   };
 
   const itemVariants = {
@@ -27,9 +28,9 @@ const Produtos = () => {
       transition: {
         type: "spring" as const,
         stiffness: 100,
-        damping: 15
-      }
-    }
+        damping: 15,
+      },
+    },
   };
 
   return (
@@ -38,13 +39,16 @@ const Produtos = () => {
       <section className="relative pt-24 md:pt-32 pb-16 md:pb-24 px-4 md:px-6 lg:px-12 overflow-hidden">
         {/* Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-foreground via-foreground to-primary-dark" />
-        
+
         {/* Pattern */}
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
-            backgroundSize: '40px 40px'
-          }} />
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
+              backgroundSize: "40px 40px",
+            }}
+          />
         </div>
 
         {/* Floating elements */}
@@ -91,7 +95,8 @@ const Produtos = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
           >
-            Explore nossas categorias e encontre a solução perfeita para seu ambiente de trabalho
+            Explore nossas categorias e encontre a solução perfeita para seu
+            ambiente de trabalho
           </motion.p>
         </motion.div>
       </section>
@@ -114,7 +119,7 @@ const Produtos = () => {
               >
                 <Link
                   to={`/produtos/${category.id}`}
-                  className="block relative aspect-[4/5] rounded-2xl md:rounded-3xl overflow-hidden"
+                  className="block relative aspect-square rounded-2xl md:rounded-3xl overflow-hidden"
                 >
                   {/* Image */}
                   <motion.img
@@ -130,10 +135,10 @@ const Produtos = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-foreground via-foreground/50 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-300" />
 
                   {/* Content */}
-                  <div className="absolute inset-0 p-4 md:p-6 lg:p-8 flex flex-col justify-end">
+                  <div className="absolute inset-0 p-3 md:p-5 lg:p-6 flex flex-col justify-end">
                     {/* Product count badge */}
                     <motion.span
-                      className="self-start bg-accent text-accent-foreground px-2 md:px-3 py-1 rounded-full text-xs md:text-sm font-medium mb-3 md:mb-4"
+                      className="self-start bg-accent text-accent-foreground px-2 py-0.5 rounded-full text-[10px] md:text-xs font-medium mb-2 md:mb-3"
                       initial={{ opacity: 0, y: 10 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.1 * index }}
@@ -141,21 +146,21 @@ const Produtos = () => {
                       {category.productCount}+ produtos
                     </motion.span>
 
-                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary-foreground mb-2 group-hover:text-accent transition-colors">
+                    <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-primary-foreground mb-1 group-hover:text-accent transition-colors">
                       {category.name}
                     </h2>
-                    
-                    <p className="text-primary-foreground/70 mb-3 md:mb-4 line-clamp-2 text-sm md:text-base">
+
+                    <p className="text-primary-foreground/70 mb-2 md:mb-3 line-clamp-2 text-xs md:text-sm">
                       {category.description}
                     </p>
 
                     <motion.div
-                      className="flex items-center gap-2 text-accent font-medium text-sm md:text-base"
+                      className="flex items-center gap-2 text-accent font-medium text-xs md:text-sm"
                       initial={{ x: 0 }}
                       whileHover={{ x: 10 }}
                     >
                       <span>Ver Produtos</span>
-                      <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
+                      <ArrowRight className="w-3 h-3 md:w-4 md:h-4" />
                     </motion.div>
                   </div>
 
@@ -174,9 +179,10 @@ const Produtos = () => {
       {/* Banner promocional */}
       <section className="px-4 md:px-8 lg:px-12 py-8 md:py-12 bg-background">
         <div className="max-w-7xl mx-auto">
-          <PromoBanner 
-            image={banner03} 
-            alt="Promoção AP Móveis - Qualidade e design para seu escritório" 
+          <PromoBanner
+            imageMobile={bannerMobile}
+            imageDesktop={bannerDesktop}
+            alt="Promoção AP Móveis - Qualidade e design para seu escritório"
           />
         </div>
       </section>
@@ -193,7 +199,8 @@ const Produtos = () => {
             Não encontrou o que procura?
           </h2>
           <p className="text-base md:text-lg text-muted-foreground mb-6 md:mb-8 px-4">
-            Temos um catálogo ainda maior em nossas lojas físicas. Entre em contato!
+            Temos um catálogo ainda maior em nossas lojas físicas. Entre em
+            contato!
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4 px-4">
             <motion.a

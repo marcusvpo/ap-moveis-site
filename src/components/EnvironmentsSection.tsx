@@ -13,17 +13,18 @@ import GradientText from "./effects/GradientText";
 import MorphingBlob from "./effects/MorphingBlob";
 import MagneticButton from "./effects/MagneticButton";
 
-import estacao1 from "@/assets/estacao_trabalho_1.jpeg";
-import estacao2 from "@/assets/estacao_trabalho_2.jpeg";
-import estacao3 from "@/assets/estacao_trabalho_3.jpeg";
-import estacao4 from "@/assets/estacao_trabalho_4.jpeg";
+import estacao1 from "@/assets/ambientes/estacao_trabalho_1.png";
+import estacao2 from "@/assets/ambientes/estacao_trabalho_2.png";
+import estacao3 from "@/assets/ambientes/estacao_trabalho_3.png";
+import estacao4 from "@/assets/ambientes/estacao_trabalho_ilha.png";
 
 const environments = [
   {
     id: 1,
     image: estacao1,
     title: "Escritório Open Space",
-    description: "Ambiente moderno e colaborativo para equipes de alta performance",
+    description:
+      "Ambiente moderno e colaborativo para equipes de alta performance",
     features: ["Estações modulares", "Integração total", "Design ergonômico"],
   },
   {
@@ -60,25 +61,29 @@ const EnvironmentsSection = () => {
   return (
     <section id="ambientes" className="py-24 relative overflow-hidden">
       {/* Animated Background */}
-      <AnimatedBackground type="geometric" intensity="low" className="absolute inset-0" />
-      
+      <AnimatedBackground
+        type="geometric"
+        intensity="low"
+        className="absolute inset-0"
+      />
+
       {/* Morphing Blobs */}
-      <MorphingBlob 
-        className="top-1/2 left-0 -translate-x-1/2 -translate-y-1/2" 
-        color="primary" 
-        size="xl" 
+      <MorphingBlob
+        className="top-1/2 left-0 -translate-x-1/2 -translate-y-1/2"
+        color="primary"
+        size="xl"
         opacity={0.08}
       />
-      <MorphingBlob 
-        className="bottom-0 right-0 translate-x-1/2 translate-y-1/2" 
-        color="accent" 
-        size="lg" 
+      <MorphingBlob
+        className="bottom-0 right-0 translate-x-1/2 translate-y-1/2"
+        color="accent"
+        size="lg"
         opacity={0.06}
       />
 
       <div className="container mx-auto px-4 relative z-10">
         <ScrollReveal preset="fade-up" className="text-center mb-16">
-          <motion.span 
+          <motion.span
             className="inline-block px-4 py-1.5 rounded-full bg-accent/10 text-accent font-semibold text-sm uppercase tracking-wider mb-4"
             whileHover={{ scale: 1.05 }}
           >
@@ -93,7 +98,11 @@ const EnvironmentsSection = () => {
         </ScrollReveal>
 
         {/* Carousel */}
-        <ScrollReveal preset="slide-up" delay={0.2} className="max-w-5xl mx-auto">
+        <ScrollReveal
+          preset="slide-up"
+          delay={0.2}
+          className="max-w-5xl mx-auto"
+        >
           <Carousel
             opts={{
               align: "start",
@@ -104,7 +113,7 @@ const EnvironmentsSection = () => {
             <CarouselContent className="-ml-4">
               {environments.map((env, index) => (
                 <CarouselItem key={env.id} className="pl-4 md:basis-1/2">
-                  <motion.div 
+                  <motion.div
                     className="group relative glow-card rounded-3xl overflow-hidden bg-card border border-border/50 h-full"
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -121,32 +130,34 @@ const EnvironmentsSection = () => {
                         whileHover={{ scale: 1.1 }}
                         transition={{ duration: 0.7 }}
                       />
-                      
+
                       {/* Shimmer effect */}
                       <motion.div
                         className="absolute inset-0 pointer-events-none"
-                        initial={{ x: '-100%' }}
-                        whileHover={{ x: '100%' }}
+                        initial={{ x: "-100%" }}
+                        whileHover={{ x: "100%" }}
                         transition={{ duration: 0.8 }}
                         style={{
-                          background: 'linear-gradient(90deg, transparent, hsl(0 0% 100% / 0.3), transparent)',
+                          background:
+                            "linear-gradient(90deg, transparent, hsl(0 0% 100% / 0.3), transparent)",
                         }}
                       />
-                      
+
                       <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent" />
-                      
+
                       {/* Glow on hover */}
                       <motion.div
                         className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                         style={{
-                          background: 'radial-gradient(circle at center, hsl(var(--primary) / 0.2) 0%, transparent 70%)',
+                          background:
+                            "radial-gradient(circle at center, hsl(var(--primary) / 0.2) 0%, transparent 70%)",
                         }}
                       />
                     </div>
 
                     {/* Content */}
                     <div className="p-6">
-                      <motion.h3 
+                      <motion.h3
                         className="text-2xl font-bold text-foreground group-hover:text-primary transition-colors"
                         whileHover={{ x: 5 }}
                       >
@@ -177,12 +188,12 @@ const EnvironmentsSection = () => {
                         ))}
                       </div>
                     </div>
-                    
+
                     {/* Border glow on hover */}
                     <motion.div
                       className="absolute inset-0 rounded-3xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                       style={{
-                        boxShadow: 'inset 0 0 0 2px hsl(var(--primary) / 0.3)',
+                        boxShadow: "inset 0 0 0 2px hsl(var(--primary) / 0.3)",
                       }}
                     />
                   </motion.div>
