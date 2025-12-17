@@ -3,10 +3,8 @@ import { MessageCircle } from "lucide-react";
 
 const WhatsAppButton = () => {
   const openWhatsApp = () => {
-    const message = encodeURIComponent(
-      "Olá! Gostaria de saber mais sobre os produtos da AP Móveis."
-    );
-    window.open(`https://wa.me/5516999999999?text=${message}`, "_blank");
+    const message = encodeURIComponent("Olá! Gostaria de saber mais sobre os produtos da AP Móveis.");
+    window.open(`https://wa.me/5516988255107?text=${message}`, "_blank");
   };
 
   return (
@@ -19,10 +17,10 @@ const WhatsAppButton = () => {
       aria-label="Abrir WhatsApp"
     >
       <MessageCircle className="w-8 h-8 text-white" />
-      
+
       {/* Pulse effect */}
       <span className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-30" />
-      
+
       {/* Tooltip */}
       <span className="absolute right-full mr-3 bg-card text-foreground text-sm px-3 py-2 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap border border-border/50">
         Fale Conosco
