@@ -264,7 +264,7 @@ const ProdutosCategoria = () => {
                   {/* Compact Action Bar */}
                   <div className="absolute top-2 right-2 flex gap-2">
                     <motion.a
-                      href={`https://wa.me/5516320270220?text=Olá! Tenho interesse no produto: ${product.name}`}
+                      href={`https://wa.me/5516988255107?text=Olá! Tenho interesse no produto: ${product.name}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-1.5 bg-accent/90 backdrop-blur-sm text-accent-foreground px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg hover:bg-accent transition-colors"
@@ -370,7 +370,7 @@ const ProdutosCategoria = () => {
                   {filteredProducts[selectedIndex].name}
                 </h3>
                 <a
-                  href={`https://wa.me/5516320270220?text=Olá! Tenho interesse no produto: ${filteredProducts[selectedIndex].name}`}
+                  href={`https://wa.me/5516988255107?text=Olá! Tenho interesse no produto: ${filteredProducts[selectedIndex].name}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 bg-accent text-accent-foreground px-4 py-2 rounded-full text-sm font-semibold hover:bg-accent-hover transition-colors"
@@ -440,7 +440,7 @@ const ProdutosCategoria = () => {
             Nossa equipe está pronta para ajudá-lo a encontrar a solução ideal
           </p>
           <motion.a
-            href="https://wa.me/5516320270220?text=Olá! Preciso de ajuda para escolher produtos."
+            href="https://wa.me/5516988255107?text=Olá! Preciso de ajuda para escolher produtos."
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-accent text-accent-foreground px-6 md:px-8 py-3 md:py-4 rounded-full font-semibold text-base md:text-lg hover:bg-accent-hover transition-colors btn-glow min-h-[48px]"
