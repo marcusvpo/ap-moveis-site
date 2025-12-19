@@ -315,7 +315,7 @@ const FullscreenMenu = () => {
 
             {/* WhatsApp CTA */}
             <motion.a
-              href="https://wa.me/5516320270220"
+              href="https://wa.me/5516988255107"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 bg-accent text-accent-foreground px-6 py-3 rounded-full text-sm font-medium min-h-[48px]"

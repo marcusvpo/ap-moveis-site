@@ -204,7 +204,7 @@ const Produtos = () => {
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4 px-4">
             <motion.a
-              href="https://wa.me/5516320270220?text=Olá! Gostaria de ver mais opções de produtos."
+              href="https://wa.me/5516988255107?text=Olá! Gostaria de ver mais opções de produtos."
               target="_blank"
               rel="noopener noreferrer"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-accent text-accent-foreground px-6 md:px-8 py-3 md:py-4 rounded-full font-semibold text-base md:text-lg hover:bg-accent-hover transition-colors btn-glow min-h-[48px]"
