@@ -127,7 +127,7 @@ const HeroSection = () => {
               className="w-full sm:w-auto btn-glow bg-accent text-accent-foreground font-bold text-base md:text-lg px-6 md:px-8 py-5 md:py-6 rounded-full group min-h-[52px]"
             >
               <a
-                href="https://wa.me/5516320270220"
+                href="https://wa.me/5516988255107?text=Olá! Gostaria de renovar meu escritório."
                 target="_blank"
                 rel="noopener noreferrer"
               >

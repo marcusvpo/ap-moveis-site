@@ -55,7 +55,7 @@ const EnvironmentsSection = () => {
     const message = encodeURIComponent(
       "Olá! Gostaria de saber mais sobre projetos de ambientes corporativos."
     );
-    window.open(`https://wa.me/5516999999999?text=${message}`, "_blank");
+    window.open(`https://wa.me/5516988255107?text=${message}`, "_blank");
   };
 
   return (
